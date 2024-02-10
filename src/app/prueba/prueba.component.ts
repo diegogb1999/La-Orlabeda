@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { DataService } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-prueba',
@@ -17,14 +19,16 @@ export class PruebaComponent implements OnInit {
   };
   //nuevosDatos: any[] = [];
 
-  constructor(private authService: AuthService) { }
+  constructor(private dataService: DataService, private authService: AuthService) { }
 
   ngOnInit(): void {
 
   }
 
+  //Data
+
   obtenerRegistro() {
-    this.authService.obtenerDatos().subscribe(
+    this.dataService.obtenerDatos().subscribe(
       (datos) => {
         this.datos = datos;
         console.log(datos)
@@ -37,7 +41,7 @@ export class PruebaComponent implements OnInit {
   }
 
   actualizarRegistro(id: string, datosActualizados: any): void {
-    this.authService.actualizarDatos(id, datosActualizados).subscribe(
+    this.dataService.actualizarDatos(id, datosActualizados).subscribe(
       (respuesta) => {
         console.log('Registro actualizado con éxito:', respuesta);
       },
@@ -49,9 +53,9 @@ export class PruebaComponent implements OnInit {
   }
 
   agregarDatosAlServicio(nuevosDatos: any[]): void {
-    
+
     // Llamamos al método agregarDatos del servicio y nos suscribimos al observable resultante
-    this.authService.agregarDatos(nuevosDatos).subscribe(
+    this.dataService.agregarDatos(nuevosDatos).subscribe(
       (respuesta) => {
         console.log('Datos agregados con éxito:', respuesta);
         // Puedes realizar acciones adicionales aquí después de agregar datos
@@ -63,6 +67,33 @@ export class PruebaComponent implements OnInit {
     );
   }
 
+  //Auth
+  email: string = '';
+  password: string = '';
+  token: string | null = null;
+
+  login() {
+    this.authService.login(this.email, this.password)
+      .then(() => {
+        console.log('Inicio de sesión exitoso');
+        this.updateToken();
+      })
+      .catch(error => console.error('Error al iniciar sesión', error));
+  }
+  logout() {
+    this.authService.logout()
+      .then(() => {
+        console.log('Cierre de sesión exitoso');
+        this.token = null;
+      })
+      .catch(error => console.error('Error al cerrar sesión', error));
+  }
+  private updateToken() {
+    this.authService.getToken()
+      .then(token => this.token = token)
+      .catch(error => console.error('Error al obtener el token',
+        error));
+  }
 
 
 }

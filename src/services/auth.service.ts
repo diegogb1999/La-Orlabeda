@@ -1,36 +1,34 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { FirebaseService } from './firebase.service';
+import { initializeApp, getApp, getApps } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { Auth, signInWithEmailAndPassword, signOut, UserCredential } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private firebaseUrl = 'DBURL_GOES_HERE/';
-  private nodo = "usuarios";
-  //private apiUrl = 'https://tu-api.com/datos';
 
-  constructor(private http: HttpClient) {
+  constructor(private firebaseService: FirebaseService) {}
 
+  login(email: string, password: string): Promise<UserCredential> {
+    const auth = this.firebaseService.getAuth();
+    return signInWithEmailAndPassword(auth, email, password);
   }
 
-  agregarDatos(datos: any): Observable<any> {
-    return this.http.post(`${this.firebaseUrl}/${this.nodo}.json`, datos);
+  logout(): Promise<void> {
+    const auth = this.firebaseService.getAuth();
+    return signOut(auth);
   }
 
-  obtenerDatos(): Observable<any> {
-    return this.http.get(`${this.firebaseUrl}/${this.nodo}.json`);
+  isAuthenticated(): boolean {
+    const auth = this.firebaseService.getAuth();
+    return auth.currentUser !== null;
   }
 
-  actualizarDatos(id: string, datosActualizados: any): Observable<any> {
-    const url = `${this.firebaseUrl}${this.nodo}/${id}.json`;
-    return this.http.put<any>(url, datosActualizados);
+  getToken(): Promise<string | null> {
+    const auth = this.firebaseService.getAuth();
+    const currentUser = auth.currentUser;
+    return currentUser ? currentUser.getIdToken() : Promise.resolve(null);
   }
-
-  eliminarRegistro(id: string): Observable<void> {
-    const url = `${this.firebaseUrl}${this.nodo}${id}.json`;
-    return this.http.delete<void>(url);
-    }
-
-
 }
