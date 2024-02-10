@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { DataService } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -19,7 +20,31 @@ export class PruebaComponent implements OnInit {
   };
   //nuevosDatos: any[] = [];
 
-  constructor(private dataService: DataService, private authService: AuthService) { }
+  registerForm: FormGroup;
+
+  constructor(private fb: FormBuilder, private dataService: DataService, private authService: AuthService) {
+    this.registerForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+
+  }
+
+  onSubmit() {
+    if (this.registerForm.valid) {
+      const email = this.registerForm.get('email')!.value;
+      const password = this.registerForm.get('password')!.value;
+      this.authService.register(email, password)
+        .then(response => {
+          console.log('Usuario registrado con éxito:', response);
+          // Puedes redirigir a una página de bienvenida u otra acción
+        })
+        .catch(error => {
+          console.error('Error al registrar usuario:', error);
+        });
+    }
+  }
+
 
   ngOnInit(): void {
 
