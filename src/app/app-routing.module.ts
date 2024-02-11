@@ -6,10 +6,10 @@ import { perroGuard } from '../guards/perro.guard';
 
 const routes: Routes = [
   // Ruta protegida con el guardián
-{ path: 'home', component: PruebaComponent, canActivate: [perroGuard] },
-// Ruta pública
-{ path: 'login', component: PruebaComponent},
-// Otras rutas...
+  { path: 'home', component: PruebaComponent, canActivate: [perroGuard] },
+  // Ruta pública
+  { path: 'login', component: PruebaComponent },
+  // Otras rutas...
 
 ];
 
