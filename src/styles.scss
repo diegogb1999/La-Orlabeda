@@ -2,9 +2,26 @@
 
 html, body { 
     height: 100%;
-    margin: 0 auto;
+    background-color: #392e0e;
  }
-body {
-    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+
+ body {
+    margin: 0;
+    font-family: 'Cascadia';
+ }
+
+ .active {
+    transform: scale(1.2);
+    font-weight: bold;
+}
+
+@font-face {
+   font-family: 'Birdgo';
+   src: url('assets/Birdgo.ttf');
+}
+
+@font-face {
+   font-family: 'Cascadia';
+   src: url('assets/Cascadia.ttf');
 }
 

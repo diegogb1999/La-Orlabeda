@@ -4,6 +4,8 @@ import { DataService } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseStorageService } from '../../services/firebase-storage.service';
+import { MatIconModule } from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @Component({
