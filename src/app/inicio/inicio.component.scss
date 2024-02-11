@@ -1,0 +1,32 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    width: 200px; /* Ajusta al tamaño deseado para tu logo */
+    height: 200px; /* Esto mantendrá la proporción de aspecto del logo */
+    animation: respirar 2s ease-in-out infinite;
+    transition: filter 0.3s ease-in-out; /* Suaviza la transición del filtro */
+}
+
+.logo {
+    width: 400px;
+    height: 400px;
+}
+
+.logo:hover {
+    filter: brightness(1.5); /* Aumenta el brillo al pasar el ratón por encima */
+}
+
+@keyframes respirar {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1); /* Ajusta este valor para cambiar la intensidad de la "respiración" */
+    }
+}
+

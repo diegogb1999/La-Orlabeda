@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import { DataService } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FirebaseStorageService } from '../../services/firebase-storage.service';
+import { MatIconModule } from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @Component({
@@ -19,7 +23,31 @@ export class PruebaComponent implements OnInit {
   };
   //nuevosDatos: any[] = [];
 
-  constructor(private dataService: DataService, private authService: AuthService) { }
+  registerForm: FormGroup;
+
+  constructor(private fb: FormBuilder, private dataService: DataService, private authService: AuthService, private firebaseStorageService: FirebaseStorageService) {
+    this.registerForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+
+  }
+
+  onSubmit() {
+    if (this.registerForm.valid) {
+      const email = this.registerForm.get('email')!.value;
+      const password = this.registerForm.get('password')!.value;
+      this.authService.register(email, password)
+        .then(response => {
+          console.log('Usuario registrado con éxito:', response);
+          // Puedes redirigir a una página de bienvenida u otra acción
+        })
+        .catch(error => {
+          console.error('Error al registrar usuario:', error);
+        });
+    }
+  }
+
 
   ngOnInit(): void {
 
@@ -95,5 +123,37 @@ export class PruebaComponent implements OnInit {
         error));
   }
 
+  //FirebaseStorage
+  selectedFile: File | null = null;
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
+  uploadFileAndAddData() {
+    if (this.selectedFile) {
+      //const filePath = `images/${Date.now()}_${file.name}`;
+      const filePath = 'tu/directorio/subida/' + this.selectedFile.name;
+      // Sube el archivo a Firebase Storage
+      this.firebaseStorageService.uploadFile(filePath,
+        this.selectedFile).then((downloadURL) => {
+          // Ahora, downloadURL contiene la URL de la imagen subida
+          // Puedes usar downloadURL para agregar datos a la base de datos en tiempo real
+          const dataToAdd = {
+            imageUrl: downloadURL,
+            // Otros datos que deseas agregar
+          };
+          // Agrega datos a la base de datos en tiempo real
+          this.dataService.agregarDatos(dataToAdd).subscribe(
+            (response) => {
+              console.log('Datos agregados con éxito', response);
+            },
+            (error) => {
+              console.error('Error al agregar datos', error);
+            }
+          );
+        });
+    }
+  }
 
 }

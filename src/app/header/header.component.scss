@@ -1,0 +1,55 @@
+.icon-display {
+    transform: scale(1.5);
+ }
+ 
+mat-drawer-content {
+  height: 100%;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+mat-drawer {
+    background: #897632;
+    width: 150px;
+}
+
+.example-container{
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    background: radial-gradient(circle, #a8caba 0%, #5d4157 100%);
+}
+
+.contenido {
+    display: block;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    position: relative;
+}
+
+.botonMenu {
+    margin: 30px;
+}
+
+h1 {
+    color: #1fec71;
+    font-weight: bold;
+    margin: 0;
+}
+.header h1 {
+    font-family: 'Birdgo';
+    font-size: 50px;
+    position: absolute; /* Hace que el título se posicione de forma absoluta dentro de su contenedor relativo */
+    left: 50%; /* Centra el título exactamente en la mitad del contenedor */
+    transform: translateX(-50%); /* Ajusta el título hacia atrás a la mitad de su ancho para centrarlo perfectamente */
+    margin: 0; /* Asegura que no haya margen adicional afectando el centrado */
+}

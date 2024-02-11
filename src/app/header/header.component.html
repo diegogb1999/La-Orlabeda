@@ -1,0 +1,27 @@
+<mat-drawer-container class="example-container" autosize hasBackdrop>
+  
+  <div class = "header">
+  <button mat-icon-button class="botonMenu" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
+    <mat-icon class="iconoMenu">menu</mat-icon>
+  </button>
+
+  <h1>La Orlabeda</h1>
+</div>
+
+  <mat-drawer #drawer mode="over">
+    <button mat-button routerLink="/login" routerLinkActive="active">
+      <mat-icon>person</mat-icon>Iniciar Sesión</button>
+    <mat-divider></mat-divider>
+    <button mat-button routerLink="/" routerLinkActive="active">
+      <mat-icon>tag</mat-icon>Productos</button>
+    <mat-divider></mat-divider>
+    <button mat-button routerLink="/" routerLinkActive="active">
+      <mat-icon>money-bill</mat-icon>Facturas</button>
+    <mat-divider></mat-divider>
+  </mat-drawer>
+
+  <div class = "contenido">
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-drawer-container>

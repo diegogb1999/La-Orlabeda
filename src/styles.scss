@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { 
+    height: 100%;
+    background-color: #392e0e;
+ }
+
+ body {
+    margin: 0;
+    font-family: 'Cascadia';
+ }
+
+ .active {
+    transform: scale(1.2);
+    font-weight: bold;
+}
+
+@font-face {
+   font-family: 'Birdgo';
+   src: url('assets/Birdgo.ttf');
+}
+
+@font-face {
+   font-family: 'Cascadia';
+   src: url('assets/Cascadia.ttf');
+}
+
