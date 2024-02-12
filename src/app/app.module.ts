@@ -28,6 +28,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDividerModule} from '@angular/material/divider'; 
 import {MatMenuModule} from '@angular/material/menu'; 
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { OrlasComponent } from './orlas/orlas.component';
+import { AlumnosComponent } from './alumnos/alumnos.component';
+import { ProfesoresComponent } from './profesores/profesores.component';
 
 
 @NgModule({
@@ -35,7 +38,10 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     AppComponent,
     PruebaComponent,
     InicioComponent,
-    HeaderComponent
+    HeaderComponent,
+    OrlasComponent,
+    AlumnosComponent,
+    ProfesoresComponent
   ],
   imports: [
     BrowserModule,

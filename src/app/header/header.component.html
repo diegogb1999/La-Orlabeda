@@ -9,20 +9,23 @@
     
   </div>
 
-  <mat-drawer #drawer mode="over">
+  <mat-drawer #drawer mode="side">
 
     <div class="sidenavContainer">
 
       <div class="sidenavTop">
 
         <button mat-button routerLink="/inicio" routerLinkActive="active-link" tabindex="-1">
-          <mat-icon>tag</mat-icon>Inicio</button>
+          <mat-icon>home</mat-icon>Inicio</button>
 
-        <button mat-button routerLink="/login" routerLinkActive="active-link" tabindex="-1">
-          <mat-icon>tag</mat-icon>Productos</button>
+        <button mat-button routerLink="/orlas" routerLinkActive="active-link" tabindex="-1">
+          <mat-icon>school</mat-icon>Orlas</button>
 
-        <button mat-button routerLink="/" routerLinkActive="active-link" tabindex="-1">
-          <mat-icon>money-bill</mat-icon>Facturas</button>
+        <button mat-button routerLink="/profesores" routerLinkActive="active-link" tabindex="-1">
+          <mat-icon>hail</mat-icon>Profesores</button>
+
+          <button mat-button routerLink="/alumnos" routerLinkActive="active-link" tabindex="-1">
+            <mat-icon>emoji_people</mat-icon>Alumnos</button>
 
       </div>
 

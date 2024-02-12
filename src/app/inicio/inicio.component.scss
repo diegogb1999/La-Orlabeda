@@ -11,8 +11,6 @@ html, body {
     align-items: center;
     align-content: center;
     justify-content: center;
-
-    
 }
 
 .logo {
@@ -22,12 +20,12 @@ html, body {
     margin-top: 100px;
     width: 270px; /* Ajusta al tamaño deseado para tu logo */
     height: 270px; /* Esto mantendrá la proporción de aspecto del logo */
-    animation: respirar 3s ease-in-out infinite;
+    animation: respirar 5s ease-in-out infinite;
     transition: filter 0.3s ease-in-out; /* Suaviza la transición del filtro */
 }
 
 .logo:hover {
-    filter: brightness(1.5); /* Aumenta el brillo al pasar el ratón por encima */
+    filter: brightness(1.7); /* Aumenta el brillo al pasar el ratón por encima */
 }
 
 @keyframes respirar {

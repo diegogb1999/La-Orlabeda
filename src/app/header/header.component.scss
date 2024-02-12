@@ -20,6 +20,11 @@ mat-drawer {
     overflow-y: hidden;
 }
 
+.copy {
+    width: 100%;
+    text-align: right;
+}
+
 .contenedorHead{
     display: flex;
     flex-direction: column;
@@ -45,8 +50,9 @@ mat-drawer {
 
 button {
     width: 100%;
-    padding: 0;
-    margin: 0;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-top: 30px;
 }
 
 h1 {
@@ -54,7 +60,7 @@ h1 {
     font-weight: bold;
     margin: 0;
     font-family: 'Birdgo';
-    font-size: 50px;
+    font-size: 70px;
     position: absolute; /* Hace que el título se posicione de forma absoluta dentro de su contenedor relativo */
     left: 50%; /* Centra el título exactamente en la mitad del contenedor */
     transform: translateX(-50%); /* Ajusta el título hacia atrás a la mitad de su ancho para centrarlo perfectamente */
@@ -63,9 +69,5 @@ h1 {
 
 .active-link {
     font-weight: bold; /* Cambia esto por el color que prefieras */
- }
-
- .contenido {
-    flex:1
  }
  
