@@ -9,15 +9,21 @@
 </div>
 
   <mat-drawer #drawer mode="over">
-    <button mat-button routerLink="/login" routerLinkActive="active">
-      <mat-icon>person</mat-icon>Iniciar Sesión</button>
-    <mat-divider></mat-divider>
-    <button mat-button routerLink="/" routerLinkActive="active">
+
+    <button class = "botonSidenav" mat-button routerLink="/" routerLinkActive="active">
       <mat-icon>tag</mat-icon>Productos</button>
-    <mat-divider></mat-divider>
-    <button mat-button routerLink="/" routerLinkActive="active">
+    
+    <button class = "botonSidenav" mat-button routerLink="/" routerLinkActive="active">
       <mat-icon>money-bill</mat-icon>Facturas</button>
-    <mat-divider></mat-divider>
+    
+    
+    <button class = "botonSidenav" mat-button routerLink="/login" routerLinkActive="active">
+      <mat-icon>person</mat-icon>Iniciar Sesión</button>
+     
+    <button class = "botonSidenav" mat-button routerLink="/login" routerLinkActive="active">
+      <mat-icon>person</mat-icon>Iniciar Sesión</button>
+    
+
   </mat-drawer>
 
   <div class = "contenido">
