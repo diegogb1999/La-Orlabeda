@@ -5,6 +5,25 @@ html, body {
     background-color: #392e0e;
  }
 
+ ::-webkit-scrollbar {
+   width: 7px; /* Ancho de la scrollbar */
+}
+
+::-webkit-scrollbar-track {
+   border-radius: 10px; /* Esquinas redondeadas de la pista */
+}
+
+::-webkit-scrollbar-thumb {
+   background: #bdbcbc; /* Color de fondo del thumb (la barra que se desplaza) */
+   border-radius: 10px; /* Esquinas redondeadas del thumb */
+   border: 1px solid rgb(1, 1, 1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+   background: #555; /* Color de fondo del thumb al pasar el ratón por encima */
+}
+
+
  body {
     margin: 0;
     font-family: 'Cascadia';

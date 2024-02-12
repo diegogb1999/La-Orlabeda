@@ -1,4 +1,4 @@
-<mat-drawer-container class="example-container" autosize hasBackdrop>
+<mat-drawer-container class="contenedorHead" autosize hasBackdrop>
 
   <div class="header">
     <button mat-icon-button class="botonMenu" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
@@ -6,6 +6,7 @@
     </button>
 
     <h1>La Orlabeda</h1>
+    
   </div>
 
   <mat-drawer #drawer mode="over">
@@ -13,6 +14,10 @@
     <div class="sidenavContainer">
 
       <div class="sidenavTop">
+
+        <button mat-button routerLink="/inicio" routerLinkActive="active-link" tabindex="-1">
+          <mat-icon>tag</mat-icon>Inicio</button>
+
         <button mat-button routerLink="/login" routerLinkActive="active-link" tabindex="-1">
           <mat-icon>tag</mat-icon>Productos</button>
 
@@ -24,19 +29,19 @@
       <div class="sidenavBot">
 
       <button class="login" mat-button routerLink="/login" routerLinkActive="active-link" tabindex="-1">
-        <mat-icon>account_circle</mat-icon>Iniciar Sesión</button>
+        <mat-icon>login</mat-icon>Iniciar Sesión</button>
 
-        <button class="registrar" mat-button routerLink="/login" routerLinkActive="active-link" tabindex="-1">
+        <button class="logout" mat-button routerLink="/inicio" routerLinkActive="active-link" tabindex="-1">
+          <mat-icon>logout</mat-icon>Cerrar Sesión</button>
+
+        <button class="registro" mat-button routerLink="/registro" routerLinkActive="active-link" tabindex="-1">
           <mat-icon>person_add</mat-icon>Registro</button>
-
       </div>
 
     </div>
 
   </mat-drawer>
 
-  <div class="contenido">
     <router-outlet></router-outlet>
-  </div>
 
 </mat-drawer-container>

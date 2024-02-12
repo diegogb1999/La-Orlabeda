@@ -7,8 +7,6 @@ mat-drawer {
     width: 150px;
 }
 
-
-
 .sidenavContainer {
     height: 100%;
     width: 100%;
@@ -22,8 +20,9 @@ mat-drawer {
     overflow-y: hidden;
 }
 
-
-.example-container{
+.contenedorHead{
+    display: flex;
+    flex-direction: column;
     margin: 0;
     height: 100%;
     width: 100%;
@@ -64,5 +63,9 @@ h1 {
 
 .active-link {
     font-weight: bold; /* Cambia esto por el color que prefieras */
+ }
+
+ .contenido {
+    flex:1
  }
  
