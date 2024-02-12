@@ -1,32 +1,41 @@
 <mat-drawer-container class="example-container" autosize hasBackdrop>
-  
-  <div class = "header">
-  <button mat-icon-button class="botonMenu" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
-    <mat-icon class="iconoMenu">menu</mat-icon>
-  </button>
 
-  <h1>La Orlabeda</h1>
-</div>
+  <div class="header">
+    <button mat-icon-button class="botonMenu" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
+      <mat-icon class="iconoMenu">menu</mat-icon>
+    </button>
+
+    <h1>La Orlabeda</h1>
+  </div>
 
   <mat-drawer #drawer mode="over">
 
-    <button class = "botonSidenav" mat-button routerLink="/" routerLinkActive="active">
-      <mat-icon>tag</mat-icon>Productos</button>
-    
-    <button class = "botonSidenav" mat-button routerLink="/" routerLinkActive="active">
-      <mat-icon>money-bill</mat-icon>Facturas</button>
-    
-    
-    <button class = "botonSidenav" mat-button routerLink="/login" routerLinkActive="active">
-      <mat-icon>person</mat-icon>Iniciar Sesión</button>
-     
-    <button class = "botonSidenav" mat-button routerLink="/login" routerLinkActive="active">
-      <mat-icon>person</mat-icon>Iniciar Sesión</button>
-    
+    <div class="sidenavContainer">
+
+      <div class="sidenavTop">
+        <button mat-button routerLink="/login" routerLinkActive="active-link" tabindex="-1">
+          <mat-icon>tag</mat-icon>Productos</button>
+
+        <button mat-button routerLink="/" routerLinkActive="active-link" tabindex="-1">
+          <mat-icon>money-bill</mat-icon>Facturas</button>
+
+      </div>
+
+      <div class="sidenavBot">
+
+      <button class="login" mat-button routerLink="/login" routerLinkActive="active-link" tabindex="-1">
+        <mat-icon>account_circle</mat-icon>Iniciar Sesión</button>
+
+        <button class="registrar" mat-button routerLink="/login" routerLinkActive="active-link" tabindex="-1">
+          <mat-icon>person_add</mat-icon>Registro</button>
+
+      </div>
+
+    </div>
 
   </mat-drawer>
 
-  <div class = "contenido">
+  <div class="contenido">
     <router-outlet></router-outlet>
   </div>
 
