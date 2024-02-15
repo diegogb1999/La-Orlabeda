@@ -13,6 +13,8 @@ export class AuthService {
 
   constructor(private firebaseService: FirebaseService, private afAuth: AngularFireAuth) {}
 
+
+  
   register(email: string, password: string) {
     return this.afAuth.createUserWithEmailAndPassword(email, password);
     }
@@ -37,4 +39,5 @@ export class AuthService {
     const currentUser = auth.currentUser;
     return currentUser ? currentUser.getIdToken() : Promise.resolve(null);
   }
+  
 }

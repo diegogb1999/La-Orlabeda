@@ -7,6 +7,8 @@ import { OrlasComponent } from './orlas/orlas.component';
 import { ProfesoresComponent } from './profesores/profesores.component';
 import { AlumnosComponent } from './alumnos/alumnos.component';
 import { HeaderComponent } from './header/header.component';
+import { LoginComponent } from './login/login.component';
+import { RegistroComponent } from './registro/registro.component';
 
 
 const routes: Routes = [
@@ -19,9 +21,9 @@ const routes: Routes = [
 
   { path: 'alumnos', component: AlumnosComponent },
 
-  { path: 'login', component: PruebaComponent },
+  { path: 'login', component: LoginComponent },
 
-  { path: 'registro', component: PruebaComponent },
+  { path: 'registro', component: RegistroComponent },
 
   { path: '**', redirectTo: '/inicio', pathMatch: 'full' }
   // Otras rutas...

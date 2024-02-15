@@ -34,7 +34,7 @@
       <button class="login" mat-button routerLink="/login" routerLinkActive="active-link" tabindex="-1">
         <mat-icon>login</mat-icon>Iniciar Sesión</button>
 
-        <button class="logout" mat-button routerLink="/inicio" routerLinkActive="active-link" tabindex="-1">
+        <button class="logout" mat-button routerLink="/inicio" (click) ="logout()" tabindex="-1">
           <mat-icon>logout</mat-icon>Cerrar Sesión</button>
 
         <button class="registro" mat-button routerLink="/registro" routerLinkActive="active-link" tabindex="-1">
@@ -45,6 +45,8 @@
 
   </mat-drawer>
 
-    <router-outlet></router-outlet>
+  <div [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''" class="anim-wrapper">
+    <router-outlet #o="outlet"></router-outlet>
+  </div>
 
 </mat-drawer-container>

@@ -31,6 +31,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { OrlasComponent } from './orlas/orlas.component';
 import { AlumnosComponent } from './alumnos/alumnos.component';
 import { ProfesoresComponent } from './profesores/profesores.component';
+import { RegistroComponent } from './registro/registro.component';
+import { LoginComponent } from './login/login.component';
+
 
 
 @NgModule({
@@ -41,7 +44,9 @@ import { ProfesoresComponent } from './profesores/profesores.component';
     HeaderComponent,
     OrlasComponent,
     AlumnosComponent,
-    ProfesoresComponent
+    ProfesoresComponent,
+    RegistroComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
