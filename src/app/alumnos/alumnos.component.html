@@ -1,1 +1,27 @@
-<p>alumnos works!</p>
+<div class="botones">
+    <button mat-fab class="botonAddAlumno" (click) = "openAddAlumnoDialog()">
+        <mat-icon>add</mat-icon>
+    </button>
+
+<div class="contenedor">
+
+    <mat-card class="view" *ngFor="let alumno of listaAlumnos">
+      <mat-card-header>
+  
+        <div class="image-container">
+            <img mat-card-image class="example-header-image" [src]= 'alumno.imgPath'>
+          </div>
+  
+      </mat-card-header>
+  
+      <mat-card-content>
+  
+        <mat-card-title>{{ alumno.nombre }}</mat-card-title>
+        <mat-card-subtitle>{{alumno.fechaNacimiento | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ alumno.edad }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ alumno.grado }}</mat-card-subtitle>
+  
+      </mat-card-content>
+    </mat-card>
+  
+  </div>

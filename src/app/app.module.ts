@@ -13,28 +13,34 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment';
 import { InicioComponent } from './inicio/inicio.component';
 import { MatIconModule } from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { HeaderComponent } from './header/header.component';
 
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatInputModule} from '@angular/material/input'; 
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatCardModule} from '@angular/material/card'; 
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatToolbarModule} from '@angular/material/toolbar'; 
-import {MatDividerModule} from '@angular/material/divider'; 
-import {MatMenuModule} from '@angular/material/menu'; 
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { OrlasComponent } from './orlas/orlas.component';
 import { AlumnosComponent } from './alumnos/alumnos.component';
 import { ProfesoresComponent } from './profesores/profesores.component';
 import { RegistroComponent } from './registro/registro.component';
 import { LoginComponent } from './login/login.component';
-
-
+import { CuadroAgregarAlumnoComponent } from './cuadro-agregar-alumno/cuadro-agregar-alumno.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';;
+import { MatNativeDateModule } from '@angular/material/core';
+import { DatePipe } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -46,7 +52,8 @@ import { LoginComponent } from './login/login.component';
     AlumnosComponent,
     ProfesoresComponent,
     RegistroComponent,
-    LoginComponent
+    LoginComponent,
+    CuadroAgregarAlumnoComponent
   ],
   imports: [
     BrowserModule,
@@ -69,9 +76,15 @@ import { LoginComponent } from './login/login.component';
     MatToolbarModule,
     MatDividerModule,
     MatMenuModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    DatePipe,
+    MatSelectModule,
+    MatRadioModule
   ],
-  providers: [],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
