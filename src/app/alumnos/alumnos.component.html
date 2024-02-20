@@ -5,7 +5,7 @@
 
 <div class="contenedor">
 
-    <mat-card class="view" *ngFor="let alumno of listaAlumnos">
+    <mat-card class="view" *ngFor="let alumno of alumnos | async">
       <mat-card-header>
   
         <div class="image-container">
@@ -17,7 +17,7 @@
       <mat-card-content>
   
         <mat-card-title>{{ alumno.nombre }}</mat-card-title>
-        <mat-card-subtitle>{{alumno.fechaNacimiento | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ alumno.fechaNacimiento }}</mat-card-subtitle>
         <mat-card-subtitle>{{ alumno.edad }}</mat-card-subtitle>
         <mat-card-subtitle>{{ alumno.grado }}</mat-card-subtitle>
   

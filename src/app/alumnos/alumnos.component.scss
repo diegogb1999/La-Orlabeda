@@ -4,3 +4,23 @@
     height: 35px;
     width: 35px;
   }
+
+  .contenedor {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-evenly;
+    
+}
+
+.view {
+  flex: 0 0 calc(50% - 20px);
+  background-color: #ebe68d;
+  border-radius: 25px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}

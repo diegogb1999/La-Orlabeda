@@ -45,7 +45,7 @@
         </mat-form-field>
         
         <button class="botonCargar" type="button" mat-raised-button (click)="fileInput.click()">Foto</button>
-        <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+        <input hidden (change)="onFileSelected()" #fileInput type="file" id="file" accept="image/*">
         
         
         <!-- Previsualización de la imagen -->
@@ -54,10 +54,8 @@
 
 
     <div mat-dialog-actions class="contenedorBotonesAgregarAlumno">
-        <button mat-button [disabled]="!addAlumnoForm.valid || !fileSelected" tabindex="-1" class="aceptar">Agregar</button>
-        <button mat-button mat-dialog-close (click)="cancelarAdd()" tabindex="-1" class="denegar">Cancelar</button>
+        <button mat-button [disabled]="!addAlumnoForm.valid || !fileSelected" tabindex="-1" class="aceptar" type="submit">Agregar</button>
+        <button mat-button mat-dialog-close (click)="cancelarAdd()" tabindex="-1" class="denegar" type="button">Cancelar</button>
     </div>
-
-
 
 </form>
