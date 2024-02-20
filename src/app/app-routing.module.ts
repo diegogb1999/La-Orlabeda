@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PruebaComponent } from './prueba/prueba.component';
 import { perroGuard } from '../guards/perro.guard';
 import { InicioComponent } from './inicio/inicio.component';
 import { OrlasComponent } from './orlas/orlas.component';

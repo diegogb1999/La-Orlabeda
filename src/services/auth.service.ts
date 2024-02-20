@@ -12,8 +12,6 @@ import { AngularFireAuth } from "@angular/fire/compat/auth";
 export class AuthService {
 
   constructor(private firebaseService: FirebaseService, private afAuth: AngularFireAuth) {}
-
-
   
   register(email: string, password: string) {
     return this.afAuth.createUserWithEmailAndPassword(email, password);

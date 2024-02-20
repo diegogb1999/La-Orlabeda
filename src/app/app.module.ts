@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { PruebaComponent } from './prueba/prueba.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AngularFireModule } from '@angular/fire/compat';
@@ -15,6 +14,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { HeaderComponent } from './header/header.component';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -45,7 +45,6 @@ import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
   declarations: [
     AppComponent,
-    PruebaComponent,
     InicioComponent,
     HeaderComponent,
     OrlasComponent,
@@ -56,11 +55,11 @@ import { MatRadioModule } from '@angular/material/radio';
     CuadroAgregarAlumnoComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     MatIconModule,
     MatButtonModule,
@@ -82,7 +81,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatNativeDateModule,
     DatePipe,
     MatSelectModule,
-    MatRadioModule
+    MatRadioModule,
+    AngularFireStorageModule
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/*import { Component, OnInit } from '@angular/core';
 
 import { DataService } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
@@ -156,4 +156,4 @@ export class PruebaComponent implements OnInit {
     }
   }
 
-}
+}*/

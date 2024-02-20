@@ -27,32 +27,37 @@
             <input matInput formControlName="edad" type="edad">
             <mat-error *ngIf="addAlumnoForm.get('edad')?.errors?.['required']">La edad es
                 requerida</mat-error>
-                <mat-error *ngIf="addAlumnoForm.get('edad')?.errors?.['pattern']">La edad debe ser un número comprendido entre 0 y 100</mat-error>
+            <mat-error *ngIf="addAlumnoForm.get('edad')?.errors?.['pattern']">La edad debe ser un número comprendido
+                entre 0 y 100</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
 
             <mat-label>Grado</mat-label>
             <mat-select formControlName="grado">
-                <mat-option value="1dam">1ºDAM</mat-option>
-                <mat-option value="1daw">1ºDAW</mat-option>
-                <mat-option value="2daw">2ºDAW</mat-option>
-                <mat-option value="2dam">2ºDAM</mat-option>
+                <mat-option value="1º DAM">1ºDAM</mat-option>
+                <mat-option value="1º DAW">1ºDAW</mat-option>
+                <mat-option value="2º DAW">2ºDAW</mat-option>
+                <mat-option value="2º DAM">2ºDAM</mat-option>
             </mat-select>
             <mat-error *ngIf="addAlumnoForm.get('grado')?.errors?.['required']">El grado es
                 requerido</mat-error>
         </mat-form-field>
-
-<button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-<input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+        
+        <button class="botonCargar" type="button" mat-raised-button (click)="fileInput.click()">Foto</button>
+        <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+        
+        
+        <!-- Previsualización de la imagen -->
+        <img class="imagePreview" *ngIf="srcResult" [src]="srcResult" style="max-width: 70px; max-height: 70px;" alt="Image preview">
     </div>
-    <div class = "linkImagen" *ngIf="fileName">
-        {{ fileName }}
-      </div>
+
 
     <div mat-dialog-actions class="contenedorBotonesAgregarAlumno">
-        <button mat-button [disabled]="!addAlumnoForm.valid" tabindex="-1" class="aceptar">Agregar</button>
+        <button mat-button [disabled]="!addAlumnoForm.valid || !fileSelected" tabindex="-1" class="aceptar">Agregar</button>
         <button mat-button mat-dialog-close (click)="cancelarAdd()" tabindex="-1" class="denegar">Cancelar</button>
     </div>
+
+
 
 </form>
