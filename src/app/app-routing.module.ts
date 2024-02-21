@@ -12,9 +12,9 @@ import { RegistroComponent } from './registro/registro.component';
 
 const routes: Routes = [
   
-  { path: 'inicio', component: InicioComponent }, //canActivate: [perroGuard]
+  { path: 'inicio', component: InicioComponent },
   
-  { path: 'orlas', component: OrlasComponent },
+  { path: 'orlas', component: OrlasComponent, canActivate: [perroGuard]},
 
   { path: 'profesores', component: ProfesoresComponent },
 

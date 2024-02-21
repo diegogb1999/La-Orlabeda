@@ -49,12 +49,13 @@ export class CuadroActualizarProfesorComponent {
         const { nombre, fechaNacimiento, edad, departamento } = this.editarProfesorForm.value;
 
         let imageUrl = this.srcResult;
+        let nombreParaComparar = nombre.toLowerCase();
 
         const fecha = new Date(fechaNacimiento);
 
         this.dataService.existeProfesorPorNombre(nombre).subscribe(async existe => {
 
-          if (!existe || (existe && this.data.profesor.nombre.toLowerCase() == nombre.toLowerCase())) {
+          if (!existe || (existe && this.data.profesor.nombreParaComparar == nombre.toLowerCase())) {
             // Si el alumno no existe, procede con la lógica de agregar alumno
             const file = this.fileInput.nativeElement.files[0];
 
@@ -63,7 +64,7 @@ export class CuadroActualizarProfesorComponent {
             imageUrl = await this.storageService.uploadFile(filePath, file);
             }
 
-            const datosUsuario = { nombre, fechaNacimiento, edad, departamento, imageUrl };
+            const datosUsuario = { nombre, fechaNacimiento, edad, departamento, imageUrl, nombreParaComparar };
 
             // Guarda los datos del usuario en Firebase Realtime Database
             this.dataService.actualizarDatos(this.data.profesor.id, datosUsuario, this.nodo).subscribe(() => {

@@ -40,6 +40,8 @@ export class CuadroAgregarProfesorComponent {
 
         const fecha = new Date(fechaNacimiento);
 
+        let nombreParaComparar = nombre.toLowerCase();
+
         this.dataService.existeProfesorPorNombre(nombre).subscribe(async existe => {
 
           if (!existe) {
@@ -49,7 +51,7 @@ export class CuadroAgregarProfesorComponent {
 
             // Sube la imagen a Firebase Storage y obtiene la URL
             const imageUrl = await this.storageService.uploadFile(filePath, file);
-            const datosUsuario = { nombre, fechaNacimiento, edad, departamento, imageUrl };
+            const datosUsuario = { nombre, fechaNacimiento, edad, departamento, imageUrl, nombreParaComparar };
 
             // Guarda los datos del usuario en Firebase Realtime Database
             this.dataService.agregarDatos(datosUsuario, this.nodo).subscribe(() => {

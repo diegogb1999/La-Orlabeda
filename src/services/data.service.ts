@@ -18,12 +18,7 @@ export class DataService {
   }
 
   agregarDatos(datos: any, nodo: string): Observable<any> {
-    const datosConComparacion = {
-      ...datos,
-      nombreParaComparar: datos.nombre.toLowerCase(), // Agregar campo en minúsculas
-    };
-
-    return this.http.post(`${this.firebaseUrl}/${nodo}.json?auth=${this.authService.getToken}`, datosConComparacion);
+    return this.http.post(`${this.firebaseUrl}/${nodo}.json?auth=${this.authService.getToken}`, datos);
   }
 
   obtenerDatos(nodo: string): Observable<any> {
@@ -41,10 +36,6 @@ export class DataService {
   */
 
   actualizarDatos(id: string, datosActualizados: any, nodo: string): Observable<any> {
-    const datosConComparacion = {
-      ...datosActualizados,
-      nombreParaComparar: datosActualizados.nombre.toLowerCase(), // Agregar campo en minúsculas
-    };
     const url = `${this.firebaseUrl}${nodo}/${id}.json?auth=${this.authService.getToken}`;
     return this.http.put<any>(url, datosActualizados);
   }

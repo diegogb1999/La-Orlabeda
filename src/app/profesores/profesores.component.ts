@@ -28,7 +28,15 @@ export class ProfesoresComponent {
 // Agrega esto dentro de tu clase AlumnosComponent
 getProfesores() {
   return this.dataService.obtenerDatos('profesores').pipe(
-    map(response => Object.keys(response).map(key => ({ ...response[key], id: key })))
+    map(response => {
+      // Comprobar si response es null o undefined
+      if (response === null || response === undefined) {
+        // Devolver un arreglo vacío si no hay datos
+        return [];
+      }
+      // Si hay datos, proceder con el mapeo
+      return Object.keys(response).map(key => ({ ...response[key], id: key }));
+    })
   );
 }
 
@@ -65,17 +73,19 @@ getProfesores() {
     
     this.seviceStorage.deleteFile(profesor.imageUrl).then(() => {
       this.dataService.eliminarRegistro(profesor.id, 'profesores').subscribe(() => {
-        this.profesores = this.getProfesores(); // Actualizar lista de alumnos
-        // Considera evitar el uso de window.location.reload() para no recargar toda la página.
+        this.profesores = this.getProfesores();
       }, error => {
-        console.error("Error al eliminar el registro del profesor ya que no existe:", error);
+        //console.error("Error al eliminar el registro del profesor ya que no existe:", error);
         this.snackBar.open('Error al eliminar el profesor.', 'Cerrar', { duration: 3000 });
       });
     }).catch(error => {
-      console.error("Error al eliminar la imagen ya que no existe:", error);
-      this.dataService.eliminarRegistro(profesor.id, 'profesores');
+      //console.error("La imagen no existe:", error);
+      this.dataService.eliminarRegistro(profesor.id, 'profesores').subscribe(() => {
+        this.profesores = this.getProfesores();
+      }, error => {
+        this.snackBar.open('Error al eliminar el profesor.', 'Cerrar', { duration: 3000 });
+      });
         this.profesores = this.getProfesores(); // Actualizar lista de alumnos
-
     });
   }
 
@@ -92,10 +102,6 @@ getProfesores() {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.eliminarProfesor(profesor);
-        this.snackBar.open('El profesor ha sido borrado con exito!', 'Cerrar', {
-          duration: 3000,
-          horizontalPosition: 'center',
-        });
       }
     });
   }
