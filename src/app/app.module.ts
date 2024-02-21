@@ -41,6 +41,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
+import { CuadroActualizarAlumnoComponent } from './cuadro-actualizar-alumno/cuadro-actualizar-alumno.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { MatRadioModule } from '@angular/material/radio';
     ProfesoresComponent,
     RegistroComponent,
     LoginComponent,
-    CuadroAgregarAlumnoComponent
+    CuadroAgregarAlumnoComponent,
+    CuadroActualizarAlumnoComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

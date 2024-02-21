@@ -1,15 +1,26 @@
-<div class="botones">
+<div *ngIf="authService.isAuthenticated()" class="botones">
     <button mat-fab class="botonAddAlumno" (click) = "openAddAlumnoDialog()">
         <mat-icon>add</mat-icon>
     </button>
-
+</div>
 <div class="contenedor">
 
     <mat-card class="view" *ngFor="let alumno of alumnos | async">
+
+      <div class = "contenedorBotones" *ngIf="authService.isAuthenticated()">
+        
+        <button mat-fab class="botonActualizarAlumno" (click)="openEditAlumnoDialog(alumno)">
+          <mat-icon>create</mat-icon>
+      </button>
+
+        <button mat-fab class="botonEliminarlumno" (click) = "eliminarAlumno(alumno)">
+          <mat-icon>close</mat-icon>
+      </button>
+      </div>
+
       <mat-card-header>
-  
         <div class="image-container">
-            <img mat-card-image class="example-header-image" [src]= 'alumno.imgPath'>
+            <img mat-card-image class="example-header-image" [src]= 'alumno.imageUrl'>
           </div>
   
       </mat-card-header>
@@ -18,7 +29,7 @@
   
         <mat-card-title>{{ alumno.nombre }}</mat-card-title>
         <mat-card-subtitle>{{ alumno.fechaNacimiento }}</mat-card-subtitle>
-        <mat-card-subtitle>{{ alumno.edad }}</mat-card-subtitle>
+        <!--<mat-card-subtitle>{{ alumno.edad }}</mat-card-subtitle>-->
         <mat-card-subtitle>{{ alumno.grado }}</mat-card-subtitle>
   
       </mat-card-content>

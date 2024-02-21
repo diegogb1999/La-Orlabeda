@@ -46,7 +46,7 @@ export class DataService {
   }
 
   eliminarRegistro(id: string, nodo: string): Observable<void> {
-    const url = `${this.firebaseUrl}${nodo}${id}.json?auth=${this.authService.getToken}`;
+    const url = `${this.firebaseUrl}${nodo}/${id}.json?auth=${this.authService.getToken}`;
     return this.http.delete<void>(url);
   }
 

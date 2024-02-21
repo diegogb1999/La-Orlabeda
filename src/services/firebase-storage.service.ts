@@ -17,7 +17,7 @@ export class FirebaseStorageService {
   }
 
   deleteFile(filePath: string): Promise<void> {
-    const fileRef = this.storage.ref(filePath);
+    const fileRef = this.storage.refFromURL(filePath);
     return fileRef.delete().toPromise();
   }
 

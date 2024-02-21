@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
 
-constructor (private afAuth: AngularFireAuth, private snackBar: MatSnackBar, private authService: AuthService, private router: Router) {
+constructor (private afAuth: AngularFireAuth, private snackBar: MatSnackBar, protected authService: AuthService, private router: Router) {
 
 }
 

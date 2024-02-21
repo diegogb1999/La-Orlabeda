@@ -1,6 +1,6 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, ViewChild, ElementRef, Inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/services/auth.service';
 import { DataService } from 'src/services/data.service';
@@ -10,33 +10,43 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-cuadro-agregar-alumno',
-  templateUrl: './cuadro-agregar-alumno.component.html',
-  styleUrls: ['./cuadro-agregar-alumno.component.scss']
+  selector: 'app-cuadro-actualizar-alumno',
+  templateUrl: './cuadro-actualizar-alumno.component.html',
+  styleUrls: ['./cuadro-actualizar-alumno.component.scss']
 })
-export class CuadroAgregarAlumnoComponent {
+export class CuadroActualizarAlumnoComponent {
   @ViewChild('fileInput') fileInput!: ElementRef;
-  addAlumnoForm: FormGroup;
+  editarAlumnoForm!: FormGroup;
   fileSelected: boolean = false;
   nodo: string = "alumnos";
 
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<CuadroAgregarAlumnoComponent>, private storageService: FirebaseStorageService, private dataService: DataService) {
-    this.addAlumnoForm = this.fb.group({
-      nombre: ['', [Validators.required]],
-      fechaNacimiento: ['', [Validators.required]],
-      edad: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-      grado: ['', [Validators.required]]
+  constructor(private fb: FormBuilder, private authService: AuthService, private snackBar: MatSnackBar, private storageService: FirebaseStorageService, private dataService: DataService, private dialogRef: MatDialogRef<CuadroActualizarAlumnoComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+    
+      this.initForm();
+    
+  }
+
+  initForm(): void {
+    this.editarAlumnoForm = new FormGroup({
+      nombre: new FormControl(this.data.alumno.nombre, Validators.required),
+      fechaNacimiento: new FormControl(this.data.alumno.fechaNacimiento, Validators.required),
+      edad: new FormControl(this.data.alumno.edad, [
+        Validators.required,
+        Validators.pattern(/^\d+$/)
+      ]),
+      grado: new FormControl(this.data.alumno.grado, Validators.required)
+      // Añade aquí otros campos según necesites
     });
   }
 
-  async agregarAlumno() {
+  async editarAlumno() {
 
     try {
 
-      if (this.addAlumnoForm.valid) {
+      if (this.editarAlumnoForm.valid) {
 
-        const { nombre, fechaNacimiento, edad, grado } = this.addAlumnoForm.value;
+        const { nombre, fechaNacimiento, edad, grado } = this.editarAlumnoForm.value;
 
         const fecha = new Date(fechaNacimiento);
         const dia = fecha.getDate().toString().padStart(2, '0');
@@ -46,7 +56,7 @@ export class CuadroAgregarAlumnoComponent {
 
         this.dataService.existeAlumnoPorNombre(nombre).subscribe(async existe => {
 
-          if (!existe) {
+          if (!existe || (existe && this.data.alumno.nombre == nombre)) {
             // Si el alumno no existe, procede con la lógica de agregar alumno
             const file = this.fileInput.nativeElement.files[0];
             const filePath = `fotosAlumno/${file.name}_${new Date().getTime()}`;
@@ -56,9 +66,9 @@ export class CuadroAgregarAlumnoComponent {
             const datosUsuario = { nombre, fechaNacimiento: fechaFormateada, edad, grado, imageUrl };
 
             // Guarda los datos del usuario en Firebase Realtime Database
-            this.dataService.agregarDatos(datosUsuario, this.nodo).subscribe(() => {
-              this.snackBar.open('Alumno añadido con éxito!', 'Cerrar', { duration: 3000 });
-              this.addAlumnoForm.reset();
+            this.dataService.actualizarDatos(this.data.alumno.id, datosUsuario, this.nodo).subscribe(() => {
+              this.snackBar.open('Alumno actualizado con éxito!', 'Cerrar', { duration: 3000 });
+              this.editarAlumnoForm.reset();
               //window.location.reload();
               this.dialogRef.close(true);
             }, error => {
@@ -66,9 +76,8 @@ export class CuadroAgregarAlumnoComponent {
               this.snackBar.open('Ocurrió un error al intentar agregar el alumno. Por favor intentelo nuevamente más tarde.', 'Cerrar', { duration: 3000 });
             });
 
-
-          } else {
-            this.snackBar.open('Alumno existente.', 'Cerrar', { duration: 3000 });
+          } else if (existe && this.data.alumno.nombre != nombre){
+            this.snackBar.open('Ese nombre de usuario ya pertenece a otro alumno.', 'Cerrar', { duration: 3000 });
           }
 
         }, error => {
@@ -104,4 +113,5 @@ export class CuadroAgregarAlumnoComponent {
       this.fileSelected = false; // Asegúrate de manejar el caso donde no hay archivo
     }
   }
+
 }

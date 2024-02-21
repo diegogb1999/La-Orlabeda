@@ -72,7 +72,8 @@ h1 {
  }
 
  .anim-wrapper {
-    position: relative;
-    overflow: hidden; /* Asegúrate de que los elementos fuera de los límites no sean visibles */
-    min-height: 100%; /* Ajusta según el contenido para evitar cambios bruscos en el tamaño */
+    flex: 1;
+    //position: relative;
+    //overflow: hidden;
+    //min-height: 100%; 
   }
