@@ -1,0 +1,19 @@
+.aceptar {
+    background-color: #00ff00;
+    margin-right: 50px;
+
+}
+
+.denegar {
+    background-color: red;
+    margin-left: 50px;
+}
+
+.contenedorPrincipal {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}

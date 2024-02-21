@@ -9,6 +9,7 @@ import { AuthService } from 'src/services/auth.service';
 import { FirebaseStorageService } from 'src/services/firebase-storage.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CuadroActualizarAlumnoComponent } from '../cuadro-actualizar-alumno/cuadro-actualizar-alumno.component';
+import { CuadroEliminarAlumnoComponent } from '../cuadro-eliminar-alumno/cuadro-eliminar-alumno.component';
 
 @Component({
   selector: 'app-alumnos',
@@ -64,7 +65,6 @@ getAlumnos() {
   eliminarAlumno(alumno: any) {
     this.seviceStorage.deleteFile(alumno.imageUrl).then(() => {
       this.dataService.eliminarRegistro(alumno.id, 'alumnos').subscribe(() => {
-        this.snackBar.open('Alumno eliminado con éxito!', 'Cerrar', { duration: 3000 });
         this.alumnos = this.getAlumnos(); // Actualizar lista de alumnos
         // Considera evitar el uso de window.location.reload() para no recargar toda la página.
       }, error => {
@@ -74,6 +74,26 @@ getAlumnos() {
     }).catch(error => {
       console.error("Error al eliminar la imagen:", error);
       this.snackBar.open('Error al eliminar la imagen del alumno.', 'Cerrar', { duration: 3000 });
+    });
+  }
+
+  openDeleteDialog(alumno: any) {
+    const dialogRef = this.dialog.open(CuadroEliminarAlumnoComponent, {
+      width: '700px',
+      height: '200px',
+      data: {
+        nombre: alumno.nombre
+      }
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.eliminarAlumno(alumno);
+        this.snackBar.open('El alumno ha sido borrado con exito!', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'center',
+        });
+      }
     });
   }
 

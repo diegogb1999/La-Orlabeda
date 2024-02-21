@@ -1,0 +1,12 @@
+<div class="contenedorPrincipal">
+    <h1 mat-dialog-title>Eliminar profesor</h1>
+    <div mat-dialog-content>
+        ¿Estas seguro de que quieres eliminar a {{nombre}}?
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close (click)="confirmarEliminacion()" tabindex="-1"
+            class="aceptar">Aceptar</button>
+        <button mat-button mat-dialog-close (click)="cancelarEliminacion()" tabindex="-1"
+            class="denegar">Cancelar</button>
+    </div>
+</div>

@@ -42,6 +42,10 @@ import { DatePipe } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { CuadroActualizarAlumnoComponent } from './cuadro-actualizar-alumno/cuadro-actualizar-alumno.component';
+import { CuadroEliminarAlumnoComponent } from './cuadro-eliminar-alumno/cuadro-eliminar-alumno.component';
+import { CuadroAgregarProfesorComponent } from './cuadro-agregar-profesor/cuadro-agregar-profesor.component';
+import { CuadroEliminarProfesorComponent } from './cuadro-eliminar-profesor/cuadro-eliminar-profesor.component';
+import { CuadroActualizarProfesorComponent } from './cuadro-actualizar-profesor/cuadro-actualizar-profesor.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +58,11 @@ import { CuadroActualizarAlumnoComponent } from './cuadro-actualizar-alumno/cuad
     RegistroComponent,
     LoginComponent,
     CuadroAgregarAlumnoComponent,
-    CuadroActualizarAlumnoComponent
+    CuadroActualizarAlumnoComponent,
+    CuadroEliminarAlumnoComponent,
+    CuadroAgregarProfesorComponent,
+    CuadroEliminarProfesorComponent,
+    CuadroActualizarProfesorComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

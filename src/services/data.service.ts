@@ -60,6 +60,16 @@ export class DataService {
       );
   }
 
+  existeProfesorPorNombre(nombre: string): Observable<boolean> {
+    nombre = nombre.toLowerCase(); // Convertir el nombre a minúsculas para la comparación
+    return this.db.list('/profesores', ref => ref.orderByChild('nombreParaComparar').equalTo(nombre))
+      .snapshotChanges() // Usa snapshotChanges para acceder a los datos y metadatos
+      .pipe(
+        take(1), // Asegura que solo se accede una vez a los datos
+        map(changes => changes.length > 0) // Transforma el resultado a un valor booleano
+      );
+  }
+
   /* 
    existeAlumnoPorNombre(nombre: string): Observable<boolean> {
     nombre = nombre.toLowerCase(); // Convertir el nombre a minúsculas para la comparación
