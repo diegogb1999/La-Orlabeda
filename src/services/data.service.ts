@@ -41,6 +41,10 @@ export class DataService {
   */
 
   actualizarDatos(id: string, datosActualizados: any, nodo: string): Observable<any> {
+    const datosConComparacion = {
+      ...datosActualizados,
+      nombreParaComparar: datosActualizados.nombre.toLowerCase(), // Agregar campo en minúsculas
+    };
     const url = `${this.firebaseUrl}${nodo}/${id}.json?auth=${this.authService.getToken}`;
     return this.http.put<any>(url, datosActualizados);
   }
