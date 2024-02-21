@@ -24,7 +24,7 @@ export class CuadroActualizarAlumnoComponent {
   constructor(private fb: FormBuilder, private authService: AuthService, private snackBar: MatSnackBar, private storageService: FirebaseStorageService, private dataService: DataService, private dialogRef: MatDialogRef<CuadroActualizarAlumnoComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
     
       this.initForm();
-    
+      this.srcResult = this.data.alumno.imageUrl;
   }
 
   initForm(): void {
@@ -48,22 +48,22 @@ export class CuadroActualizarAlumnoComponent {
 
         const { nombre, fechaNacimiento, edad, grado } = this.editarAlumnoForm.value;
 
+        let imageUrl = this.srcResult;
+
         const fecha = new Date(fechaNacimiento);
-        const dia = fecha.getDate().toString().padStart(2, '0');
-        const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
-        const ano = fecha.getFullYear();
-        const fechaFormateada = `${dia}-${mes}-${ano}`; // Formato DD-MM-YYYY
 
         this.dataService.existeAlumnoPorNombre(nombre).subscribe(async existe => {
 
-          if (!existe || (existe && this.data.alumno.nombre == nombre)) {
+          if (!existe || (existe && this.data.alumno.nombre.toLowerCase() == nombre.toLowerCase())) {
             // Si el alumno no existe, procede con la lógica de agregar alumno
             const file = this.fileInput.nativeElement.files[0];
-            const filePath = `fotosAlumno/${file.name}_${new Date().getTime()}`;
 
-            // Sube la imagen a Firebase Storage y obtiene la URL
-            const imageUrl = await this.storageService.uploadFile(filePath, file);
-            const datosUsuario = { nombre, fechaNacimiento: fechaFormateada, edad, grado, imageUrl };
+            if (file) { 
+            const filePath = `fotosAlumno/${file.name}`;
+            imageUrl = await this.storageService.uploadFile(filePath, file);
+            }
+
+            const datosUsuario = { nombre, fechaNacimiento, edad, grado, imageUrl };
 
             // Guarda los datos del usuario en Firebase Realtime Database
             this.dataService.actualizarDatos(this.data.alumno.id, datosUsuario, this.nodo).subscribe(() => {
@@ -76,7 +76,7 @@ export class CuadroActualizarAlumnoComponent {
               this.snackBar.open('Ocurrió un error al intentar agregar el alumno. Por favor intentelo nuevamente más tarde.', 'Cerrar', { duration: 3000 });
             });
 
-          } else if (existe && this.data.alumno.nombre != nombre){
+          } else {
             this.snackBar.open('Ese nombre de usuario ya pertenece a otro alumno.', 'Cerrar', { duration: 3000 });
           }
 

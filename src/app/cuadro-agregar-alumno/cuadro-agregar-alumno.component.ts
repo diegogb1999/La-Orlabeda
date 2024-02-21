@@ -39,21 +39,17 @@ export class CuadroAgregarAlumnoComponent {
         const { nombre, fechaNacimiento, edad, grado } = this.addAlumnoForm.value;
 
         const fecha = new Date(fechaNacimiento);
-        const dia = fecha.getDate().toString().padStart(2, '0');
-        const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
-        const ano = fecha.getFullYear();
-        const fechaFormateada = `${dia}-${mes}-${ano}`; // Formato DD-MM-YYYY
 
         this.dataService.existeAlumnoPorNombre(nombre).subscribe(async existe => {
 
           if (!existe) {
             // Si el alumno no existe, procede con la lógica de agregar alumno
             const file = this.fileInput.nativeElement.files[0];
-            const filePath = `fotosAlumno/${file.name}_${new Date().getTime()}`;
+            const filePath = `fotosAlumno/${file.name}`;
 
             // Sube la imagen a Firebase Storage y obtiene la URL
             const imageUrl = await this.storageService.uploadFile(filePath, file);
-            const datosUsuario = { nombre, fechaNacimiento: fechaFormateada, edad, grado, imageUrl };
+            const datosUsuario = { nombre, fechaNacimiento, edad, grado, imageUrl };
 
             // Guarda los datos del usuario en Firebase Realtime Database
             this.dataService.agregarDatos(datosUsuario, this.nodo).subscribe(() => {
