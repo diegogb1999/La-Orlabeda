@@ -14,7 +14,7 @@ const routes: Routes = [
   
   { path: 'inicio', component: InicioComponent },
   
-  { path: 'orlas', component: OrlasComponent, canActivate: [perroGuard]},
+  { path: 'orlas', component: OrlasComponent }, //, canActivate: [perroGuard]
 
   { path: 'profesores', component: ProfesoresComponent },
 

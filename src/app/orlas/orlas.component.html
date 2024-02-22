@@ -1,1 +1,32 @@
-<p>orlas works!</p>
+<!--<div *ngIf="authService.isAuthenticated()" class="botones">
+    <button mat-fab class="botonAddOrla" (click) = "openAddOrlaDialog()">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
+
+<div class="contenedor">
+
+    <mat-card class="view" *ngFor="let orla of orlas | async">
+
+      <div class = "contenedorBotones" *ngIf="authService.isAuthenticated()">
+        <button mat-fab class="botonEliminarOrla" (click) = "openDeleteDialog(orla)">
+          <mat-icon>close</mat-icon>
+      </button>
+      </div>
+
+      <mat-card-header>
+        <div class="image-container">
+            <img mat-card-image class="example-header-image" [src]= 'orla'>
+          </div>
+      </mat-card-header>
+  
+      <mat-card-content>
+        <mat-card-title>{{ orla.nombre }}</mat-card-title>
+        <mat-card-subtitle>{{ profesor.fechaNacimiento | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
+
+        <mat-card-subtitle>{{ profesor.departamento }}</mat-card-subtitle>
+  
+      </mat-card-content>
+    </mat-card>
+  
+  </div>-->

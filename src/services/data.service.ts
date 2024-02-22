@@ -76,5 +76,38 @@ export class DataService {
   }
   */
 
+  // Agrega esto dentro de tu clase AlumnosComponent
+  getAlumnos() {
+    return this.obtenerDatos('alumnos').pipe(
+      map(response => {
+        // Comprobar si response es null o undefined
+        if (response === null || response === undefined) {
+          // Devolver un arreglo vacío si no hay datos
+          return [];
+        }
+        // Si hay datos, proceder con el mapeo
+        return Object.keys(response).map(key => ({ ...response[key], id: key }));
+      })
+    );
+  }
 
+  getProfesores() {
+    return this.obtenerDatos('profesores').pipe(
+      map(response => {
+        // Comprobar si response es null o undefined
+        if (response === null || response === undefined) {
+          // Devolver un arreglo vacío si no hay datos
+          return [];
+        }
+        // Si hay datos, proceder con el mapeo
+        return Object.keys(response).map(key => ({ ...response[key], id: key }));
+      })
+    );
+  }
+  agregarAlumnosOrla(data: any, nodo:string): Observable<any> {
+    return this.http.post(`${this.firebaseUrl}/${nodo}.json?auth=${this.authService.getToken}`, data);
+  }
+  agregarProfesoresOrla(data: any, nodo:string): Observable<any> {
+    return this.http.post(`${this.firebaseUrl}/${nodo}.json?auth=${this.authService.getToken}`, data);
+  }
 }

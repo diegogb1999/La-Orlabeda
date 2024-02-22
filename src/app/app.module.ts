@@ -36,8 +36,9 @@ import { LoginComponent } from './login/login.component';
 import { CuadroAgregarAlumnoComponent } from './cuadro-agregar-alumno/cuadro-agregar-alumno.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';;
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DatePipe } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
@@ -46,6 +47,7 @@ import { CuadroEliminarAlumnoComponent } from './cuadro-eliminar-alumno/cuadro-e
 import { CuadroAgregarProfesorComponent } from './cuadro-agregar-profesor/cuadro-agregar-profesor.component';
 import { CuadroEliminarProfesorComponent } from './cuadro-eliminar-profesor/cuadro-eliminar-profesor.component';
 import { CuadroActualizarProfesorComponent } from './cuadro-actualizar-profesor/cuadro-actualizar-profesor.component';
+import { CuadroMostrarAlumnosProfesoresComponent } from './cuadro-mostrar-alumnos-profesores/cuadro-mostrar-alumnos-profesores.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import { CuadroActualizarProfesorComponent } from './cuadro-actualizar-profesor/
     CuadroEliminarAlumnoComponent,
     CuadroAgregarProfesorComponent,
     CuadroEliminarProfesorComponent,
-    CuadroActualizarProfesorComponent
+    CuadroActualizarProfesorComponent,
+    CuadroMostrarAlumnosProfesoresComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -92,7 +95,8 @@ import { CuadroActualizarProfesorComponent } from './cuadro-actualizar-profesor/
     DatePipe,
     MatSelectModule,
     MatRadioModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    MatCheckboxModule
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
   bootstrap: [AppComponent]

@@ -22,23 +22,8 @@ export class ProfesoresComponent {
   constructor (public dialog: MatDialog, private dataService: DataService, private storage: AngularFireStorage, protected authService: AuthService, protected seviceStorage: FirebaseStorageService, private snackBar: MatSnackBar) {
   }
   ngAfterViewInit() {
-    this.profesores = this.getProfesores();
+    this.profesores = this.dataService.getProfesores();
   }
-
-// Agrega esto dentro de tu clase AlumnosComponent
-getProfesores() {
-  return this.dataService.obtenerDatos('profesores').pipe(
-    map(response => {
-      // Comprobar si response es null o undefined
-      if (response === null || response === undefined) {
-        // Devolver un arreglo vacío si no hay datos
-        return [];
-      }
-      // Si hay datos, proceder con el mapeo
-      return Object.keys(response).map(key => ({ ...response[key], id: key }));
-    })
-  );
-}
 
   openAddProfesorDialog() {
     const dialogRef = this.dialog.open(CuadroAgregarProfesorComponent, {
@@ -49,7 +34,7 @@ getProfesores() {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.profesores = this.getProfesores();
+        this.profesores = this.dataService.getProfesores();
       }
     });
   }
@@ -64,7 +49,7 @@ getProfesores() {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         // Aquí puedes manejar el resultado del diálogo, por ejemplo, actualizar la lista de alumnos
-        this.profesores = this.getProfesores();
+        this.profesores = this.dataService.getProfesores();
       }
     });
   }
@@ -73,7 +58,7 @@ getProfesores() {
     
     this.seviceStorage.deleteFile(profesor.imageUrl).then(() => {
       this.dataService.eliminarRegistro(profesor.id, 'profesores').subscribe(() => {
-        this.profesores = this.getProfesores();
+        this.profesores = this.dataService.getProfesores();
       }, error => {
         //console.error("Error al eliminar el registro del profesor ya que no existe:", error);
         this.snackBar.open('Error al eliminar el profesor.', 'Cerrar', { duration: 3000 });
@@ -81,11 +66,11 @@ getProfesores() {
     }).catch(error => {
       //console.error("La imagen no existe:", error);
       this.dataService.eliminarRegistro(profesor.id, 'profesores').subscribe(() => {
-        this.profesores = this.getProfesores();
+        this.profesores = this.dataService.getProfesores();
       }, error => {
         this.snackBar.open('Error al eliminar el profesor.', 'Cerrar', { duration: 3000 });
       });
-        this.profesores = this.getProfesores(); // Actualizar lista de alumnos
+        this.profesores = this.dataService.getProfesores(); // Actualizar lista de alumnos
     });
   }
 

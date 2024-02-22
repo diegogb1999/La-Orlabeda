@@ -23,22 +23,7 @@ export class AlumnosComponent {
   constructor(public dialog: MatDialog, private dataService: DataService, private storage: AngularFireStorage, protected authService: AuthService, protected seviceStorage: FirebaseStorageService, private snackBar: MatSnackBar) {
   }
   ngAfterViewInit() {
-    this.alumnos = this.getAlumnos();
-  }
-
-  // Agrega esto dentro de tu clase AlumnosComponent
-  getAlumnos() {
-    return this.dataService.obtenerDatos('alumnos').pipe(
-      map(response => {
-        // Comprobar si response es null o undefined
-        if (response === null || response === undefined) {
-          // Devolver un arreglo vacío si no hay datos
-          return [];
-        }
-        // Si hay datos, proceder con el mapeo
-        return Object.keys(response).map(key => ({ ...response[key], id: key }));
-      })
-    );
+    this.alumnos = this.dataService.getAlumnos();
   }
 
   openAddAlumnoDialog() {
@@ -50,7 +35,7 @@ export class AlumnosComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.alumnos = this.getAlumnos();
+        this.alumnos = this.dataService.getAlumnos();
       }
     });
   }
@@ -65,7 +50,7 @@ export class AlumnosComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         // Aquí puedes manejar el resultado del diálogo, por ejemplo, actualizar la lista de alumnos
-        this.alumnos = this.getAlumnos();
+        this.alumnos = this.dataService.getAlumnos();
       }
     });
   }
@@ -74,7 +59,7 @@ export class AlumnosComponent {
     
     this.seviceStorage.deleteFile(alumno.imageUrl).then(() => {
       this.dataService.eliminarRegistro(alumno.id, 'alumnos').subscribe(() => {
-        this.alumnos = this.getAlumnos();
+        this.alumnos = this.dataService.getAlumnos();
       }, error => {
         //console.error("Error al eliminar el registro del profesor ya que no existe:", error);
         this.snackBar.open('Error al eliminar el alumno.', 'Cerrar', { duration: 3000 });
@@ -82,11 +67,11 @@ export class AlumnosComponent {
     }).catch(error => {
       //console.error("La imagen no existe:", error);
       this.dataService.eliminarRegistro(alumno.id, 'alumnos').subscribe(() => {
-        this.alumnos = this.getAlumnos();
+        this.alumnos = this.dataService.getAlumnos();
       }, error => {
         this.snackBar.open('Error al eliminar el alumno.', 'Cerrar', { duration: 3000 });
       });
-        this.alumnos = this.getAlumnos(); // Actualizar lista de alumnos
+        this.alumnos = this.dataService.getAlumnos(); // Actualizar lista de alumnos
     });
   }
 

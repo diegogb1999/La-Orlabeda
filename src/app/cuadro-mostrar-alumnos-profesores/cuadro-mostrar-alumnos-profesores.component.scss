@@ -1,0 +1,27 @@
+.botonAddAlumnoOrla {
+    background-color: white;
+    color: #00ff00;
+    height: 35px;
+    width: 35px;
+  }
+
+  .tablas {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .tablaAlumno {
+    margin-top: 30px;
+  }
+
+  th {
+    text-align: center;
+
+    color: #17181f;
+  }
+  
+  td {
+    text-align: center;
+  }
