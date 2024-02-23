@@ -7,21 +7,83 @@
 
   .tablas {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
-    align-items: center;
-  }
-
-  .tablaAlumno {
-    margin-top: 30px;
+    text-align: center;
   }
 
   th {
+    font-size: 20px;
     text-align: center;
-
     color: #17181f;
   }
-  
+  ::ng-deep .mat-sort-header-container {
+    flex-direction: column; /* Cambia la disposición a vertical */
+    align-items: flex-start; /* Alinea los elementos al inicio para mantener el texto alineado a la izquierda */
+  }
+  ::ng-deep .mat-sort-header-arrow {
+    transform: translateY(0px) !important; /* Ajusta según sea necesario */
+    margin-top: 4px; /* Añade un pequeño margen arriba de la flecha para separarla del texto */
+  }
+
   td {
     text-align: center;
+  }
+
+  table {
+    width: 600px;
+    max-height: 350px;
+    margin-top: 10px;
+  }
+  
+  span {
+    font-size: 30px;
+    font-family: 'Cascadia';
+    margin-top: 30px;
+  }
+
+  .tituloProfesor {
+    margin-top: 20px;
+  }
+
+  .tituloAlumno {
+    margin-top: 20px;
+  }
+
+  .contenedorBotonesAgregarOrla {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    margin-top: 13px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+
+  .filtro {
+    margin-top: 20px;
+  }
+
+  .nombreOrla {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-top: 13px;
+  }
+
+  .aceptar {
+    background-color: #00ff00;
+    margin-right: 50px;
+  
+  }
+  
+  .denegar {
+    background-color: red;
+    margin-left: 50px;
+  }
+
+  mat-paginator {
+    margin-top: 20px;
   }

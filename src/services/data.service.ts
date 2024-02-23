@@ -110,4 +110,7 @@ export class DataService {
   agregarProfesoresOrla(data: any, nodo:string): Observable<any> {
     return this.http.post(`${this.firebaseUrl}/${nodo}.json?auth=${this.authService.getToken}`, data);
   }
+  agregarNombreOrla(data: any, nodo:string): Observable<any> {
+    return this.http.post(`${this.firebaseUrl}/${nodo}.json?auth=${this.authService.getToken}`, data);
+  }
 }

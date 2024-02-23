@@ -1,8 +1,15 @@
 <div class="tablas">
     <div class="tablaProfesor">
-        <table mat-table [dataSource]="dataProfesor" class="mat-elevation-z8">
+        <div class ="tituloProfesor"><span>Profesores</span></div>
+        <div class="filtro">
+            <mat-form-field appearance="outline">
+                <mat-label>Filtro por nombre</mat-label>
+                <input matInput (keyup)="applyFilterProfesor($event)" #input>
+            </mat-form-field>
+        </div>
+        <table mat-table [dataSource]="dataProfesor" class="mat-elevation-z8" matSort #profesorSort="matSort">
             <ng-container matColumnDef="seleccionar">
-                <th mat-header-cell *matHeaderCellDef></th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
                 <td mat-cell *matCellDef="let profesor">
                     <mat-checkbox (click)="$event.stopPropagation()" (change)="seleccionProfesor.toggle(profesor)"
                         [checked]="seleccionProfesor.isSelected(profesor)" tabIndex="-1">
@@ -11,30 +18,43 @@
             </ng-container>
             <!-- Nombre Column -->
             <ng-container matColumnDef="nombre">
-                <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
                 <td mat-cell *matCellDef="let profesor"> {{profesor.nombre}} </td>
             </ng-container>
             <!-- Fecha de nacimiento Column -->
             <ng-container matColumnDef="fechaNacimiento">
-                <th mat-header-cell *matHeaderCellDef> Fecha de nacimiento </th>
-                <td mat-cell *matCellDef="let profesor"> {{profesor.fechaNacimiento}} </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de nacimiento </th>
+                <td mat-cell *matCellDef="let profesor"> {{profesor.fechaNacimiento | date: 'dd/MM/yyyy' }} </td>
             </ng-container>
             <!-- Departamento Column -->
             <ng-container matColumnDef="departamento">
-                <th mat-header-cell *matHeaderCellDef> Departamento </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Departamento </th>
                 <td mat-cell *matCellDef="let profesor"> {{profesor.departamento}} </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumnsProfesores"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumnsProfesores;"></tr>
         </table>
+
+        <mat-paginator #profesorPaginator [pageSizeOptions]="[3, 5, 10]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
     </div>
 
     <div class="tablaAlumno">
-        <table mat-table [dataSource]="dataAlumno" class="mat-elevation-z8">
+        <div class ="tituloAlumno"><span>Alumnos</span></div>
+        <div class="filtro">
+            <mat-form-field appearance="outline">
+                <mat-label>Filtro por nombre</mat-label>
+                <input matInput (keyup)="applyFilterAlumno($event)" #input>
+            </mat-form-field>
+        </div>
+
+        <table mat-table [dataSource]="dataAlumno" class="mat-elevation-z8" matSort #alumnoSort="matSort">
 
             <ng-container matColumnDef="seleccionar">
-                <th mat-header-cell *matHeaderCellDef></th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
                 <td mat-cell *matCellDef="let alumno">
                     <mat-checkbox (click)="$event.stopPropagation()" (change)="seleccionAlumno.toggle(alumno)"
                         [checked]="seleccionAlumno.isSelected(alumno)" tabIndex="-1">
@@ -43,28 +63,44 @@
             </ng-container>
             <!-- Nombre Column -->
             <ng-container matColumnDef="nombre">
-                <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
                 <td mat-cell *matCellDef="let alumno"> {{alumno.nombre}} </td>
             </ng-container>
             <!-- Fecha de nacimiento Column -->
             <ng-container matColumnDef="fechaNacimiento">
-                <th mat-header-cell *matHeaderCellDef> Fecha de nacimiento </th>
-                <td mat-cell *matCellDef="let alumno"> {{alumno.fechaNacimiento}} </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de nacimiento </th>
+                <td mat-cell *matCellDef="let alumno"> {{alumno.fechaNacimiento | date: 'dd/MM/yyyy' }} </td>
             </ng-container>
             <!-- Grado Column -->
             <ng-container matColumnDef="grado">
-                <th mat-header-cell *matHeaderCellDef> Grado </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Grado </th>
                 <td mat-cell *matCellDef="let alumno"> {{alumno.grado}} </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumnsAlumnos"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumnsAlumnos;"></tr>
         </table>
+        <mat-paginator #alumnoPaginator [pageSizeOptions]="[3, 5, 10]"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements">
+</mat-paginator>
     </div>
 </div>
 
+<div class = "nombreOrla">
+    <form class="formularioAgregarOrla" [formGroup]="addOrlaForm" (ngSubmit)="agregarNombreOrla()">
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre de la orla</mat-label>
+                <input matInput formControlName="nombre">
+                <mat-error *ngIf="addOrlaForm.get('nombre')?.errors?.['required']">El nombre de la orla es
+                    requerido</mat-error>
+            </mat-form-field>
+        </form>
+</div>
+
 <div mat-dialog-actions class="contenedorBotonesAgregarOrla">
-    <button mat-button tabindex="-1" class="aceptar" (click)="agregarProfesorOrla();agregarAlumnoOrla()">Agregar</button>
+
+    <button mat-button tabindex="-1" class="aceptar" [disabled]="!addOrlaForm.valid" type="submit" (click)="agregarProfesorOrla();agregarAlumnoOrla()">Agregar</button>
     <button mat-button mat-dialog-close (click)="cancelarAdd()" tabindex="-1" class="denegar"
         type="button">Cancelar</button>
 </div>
