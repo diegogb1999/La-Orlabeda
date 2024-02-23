@@ -29,7 +29,7 @@ ngAfterViewInit() {
 openAddOrlaDialog() {
   const dialogRef = this.dialog.open(CuadroMostrarAlumnosProfesoresComponent, {
     width: '1300px',
-    height: '600px',
+    height: '650px',
     data: {}
   })
 
