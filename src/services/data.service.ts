@@ -65,6 +65,16 @@ export class DataService {
       );
   }
 
+  existeOrlaPorNombre(nombre: string): Observable<boolean> {
+    nombre = nombre.toLowerCase(); // Convertir el nombre a minúsculas para la comparación
+    return this.db.list('/orlas', ref => ref.orderByChild('nombre').equalTo(nombre))
+      .snapshotChanges() // Usa snapshotChanges para acceder a los datos y metadatos
+      .pipe(
+        take(1), // Asegura que solo se accede una vez a los datos
+        map(changes => changes.length > 0) // Transforma el resultado a un valor booleano
+      );
+  }
+
   /* 
    existeAlumnoPorNombre(nombre: string): Observable<boolean> {
     nombre = nombre.toLowerCase(); // Convertir el nombre a minúsculas para la comparación
@@ -104,13 +114,14 @@ export class DataService {
       })
     );
   }
-  agregarAlumnosOrla(data: any, nodo:string): Observable<any> {
-    return this.http.post(`${this.firebaseUrl}/${nodo}.json?auth=${this.authService.getToken}`, data);
+
+  agregarDatosOrla(datos: any, nodo: string, nombre: string): Observable<any> {
+    return this.http.put(`${this.firebaseUrl}/${nodo}/${nombre}.json?auth=${this.authService.getToken}`, datos);
   }
-  agregarProfesoresOrla(data: any, nodo:string): Observable<any> {
-    return this.http.post(`${this.firebaseUrl}/${nodo}.json?auth=${this.authService.getToken}`, data);
+  agregarProfesoresOrla(datos: any, nodo: string, nombreOrla: string): Observable<any> {
+    return this.http.put(`${this.firebaseUrl}/${nodo}/${nombreOrla}/profesores.json?auth=${this.authService.getToken}`, datos);
   }
-  agregarNombreOrla(data: any, nodo:string): Observable<any> {
-    return this.http.post(`${this.firebaseUrl}/${nodo}.json?auth=${this.authService.getToken}`, data);
+  agregarAlumnosOrla(datos: any, nodo: string, nombreOrla: string): Observable<any> {
+    return this.http.put(`${this.firebaseUrl}/${nodo}/${nombreOrla}/alumnos.json?auth=${this.authService.getToken}`, datos);
   }
 }

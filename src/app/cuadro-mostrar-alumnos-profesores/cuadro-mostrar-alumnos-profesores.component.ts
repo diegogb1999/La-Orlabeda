@@ -11,7 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { Alumno } from 'src/clases/Alumno';
 import { Profesor } from 'src/clases/Profesor';
-import {SelectionModel} from '@angular/cdk/collections';
+import { SelectionModel } from '@angular/cdk/collections';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 
@@ -27,7 +27,7 @@ export class CuadroMostrarAlumnosProfesoresComponent {
   dataAlumno!: MatTableDataSource<Alumno>;
   dataProfesor!: MatTableDataSource<Alumno>;
 
-  displayedColumnsAlumnos: string[] = ['seleccionar', 'nombre', 'fechaNacimiento', 'grado', ];
+  displayedColumnsAlumnos: string[] = ['seleccionar', 'nombre', 'fechaNacimiento', 'grado',];
   displayedColumnsProfesores: string[] = ['seleccionar', 'nombre', 'fechaNacimiento', 'departamento'];
 
   seleccionAlumno = new SelectionModel<Alumno>(true, []);
@@ -35,10 +35,10 @@ export class CuadroMostrarAlumnosProfesoresComponent {
 
   addOrlaForm: FormGroup;
 
-  nodo: string = "orlas";
-  
+  nodo: string = 'orlas';
 
-  constructor (public dialog: MatDialog, protected dataService: DataService, private storage: AngularFireStorage, protected authService: AuthService, protected seviceStorage: FirebaseStorageService, private snackBar: MatSnackBar, private dialogRef: MatDialogRef<CuadroMostrarAlumnosProfesoresComponent>, private fb: FormBuilder) {
+
+  constructor(public dialog: MatDialog, protected dataService: DataService, private storage: AngularFireStorage, protected authService: AuthService, protected seviceStorage: FirebaseStorageService, private snackBar: MatSnackBar, private dialogRef: MatDialogRef<CuadroMostrarAlumnosProfesoresComponent>, private fb: FormBuilder) {
     this.addOrlaForm = this.fb.group({
       nombre: ['', [Validators.required]],
     });
@@ -47,7 +47,7 @@ export class CuadroMostrarAlumnosProfesoresComponent {
   @ViewChild('profesorPaginator') profesorPaginator!: MatPaginator;
   @ViewChild('alumnoPaginator') alumnoPaginator!: MatPaginator;
   @ViewChild('profesorSort') profesorSort!: MatSort;
-@ViewChild('alumnoSort') alumnoSort!: MatSort;
+  @ViewChild('alumnoSort') alumnoSort!: MatSort;
 
 
   ngOnInit(): void {
@@ -89,11 +89,11 @@ export class CuadroMostrarAlumnosProfesoresComponent {
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
-  
+
       const normalizedFilter = filter.toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
-  
+
       return normalizedGenero.includes(normalizedFilter);
     };
     this.dataProfesor.filter = filterValue.trim().toLowerCase();
@@ -107,67 +107,81 @@ export class CuadroMostrarAlumnosProfesoresComponent {
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
-  
+
       const normalizedFilter = filter.toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
-  
+
       return normalizedGenero.includes(normalizedFilter);
     };
     this.dataAlumno.filter = filterValue.trim().toLowerCase();
   }
 
-  agregarAlumnoOrla(): void {
-  //this.eliminarProduccion(produccion);
-  const alumnosSeleccionados = this.seleccionAlumno.selected;
-   // Aquí, puedes llamar a tu servicio para agregar los alumnos seleccionados a la base de datos.
-  // Por ejemplo:
-  this.dataService.agregarAlumnosOrla(alumnosSeleccionados, 'orlas').subscribe({
-    next: (result) => {
-      console.log("Alumnos agregados con éxito", result);
-      // Aquí puedes limpiar la selección si lo deseas
-      this.seleccionAlumno.clear();
-      this.dialogRef.close(true);
-    },
-    error: (error) => console.error("Error al agregar alumnos", error)
-  });
-}
+  agregarAlumnoOrla(nombre: string): void {
+    //this.eliminarProduccion(produccion);
+    const alumnosSeleccionados = this.seleccionAlumno.selected.map(p => p.id);
+    // Aquí, puedes llamar a tu servicio para agregar los alumnos seleccionados a la base de datos.
+    // Por ejemplo:
+    this.dataService.agregarAlumnosOrla(alumnosSeleccionados, this.nodo, nombre).subscribe({
+      next: (result) => {
+        console.log("Alumnos agregados con éxito", result);
+        // Aquí puedes limpiar la selección si lo deseas
+        this.seleccionAlumno.clear();
 
-agregarProfesorOrla(): void {
-  //this.eliminarProduccion(produccion);
-  const profesoresSeleccionados = this.seleccionProfesor.selected;
-   // Aquí, puedes llamar a tu servicio para agregar los alumnos seleccionados a la base de datos.
-  // Por ejemplo:
-  this.dataService.agregarProfesoresOrla(profesoresSeleccionados, 'orlas').subscribe({
-    next: (result) => {
-      console.log("Profesores agregados con éxito", result);
-      // Aquí puedes limpiar la selección si lo deseas
-      this.seleccionProfesor.clear();
-      this.dialogRef.close(true);
-    },
-    error: (error) => console.error("Error al agregar alumnos", error)
-  });
-}
+      },
+      error: (error) => console.error("Error al agregar alumnos", error)
+    });
+  }
 
-agregarNombreOrla(): void {
-  const { nombre } = this.addOrlaForm.value;
+  agregarProfesorOrla(nombre: string): void {
+    //this.eliminarProduccion(produccion);
+    const profesoresSeleccionados = this.seleccionProfesor.selected.map(p => p.id);
+    // Aquí, puedes llamar a tu servicio para agregar los alumnos seleccionados a la base de datos.
+    // Por ejemplo:
+    this.dataService.agregarProfesoresOrla(profesoresSeleccionados, this.nodo, nombre).subscribe({
+      next: (result) => {
+        console.log("Profesores agregados con éxito", result);
+        // Aquí puedes limpiar la selección si lo deseas
+        this.seleccionProfesor.clear();
 
-  const datosUsuario = { nombre };
+      },
+      error: (error) => console.error("Error al agregar alumnos", error)
+    });
+  }
 
-  this.dataService.agregarNombreOrla(datosUsuario, this.nodo).subscribe(() => {
-    this.snackBar.open('Nombre de orla añadida con éxito!', 'Cerrar', { duration: 3000 });
-    this.addOrlaForm.reset();
-    //window.location.reload();
-    this.dialogRef.close(true);
-  }, error => {
-    console.error(error);
-    this.snackBar.open('Ocurrió un error al intentar agregar el nombre de la orla. Por favor intentelo nuevamente más tarde.', 'Cerrar', { duration: 3000 });
-  });
-  
-}
+  agregarNombreOrla(): void {
+    const { nombre } = this.addOrlaForm.value;
 
-cancelarAdd(): void {
-  this.dialogRef.close(false);
-}
+    const datosUsuario = { nombre };
+
+    this.dataService.existeOrlaPorNombre(nombre).subscribe(async existe => {
+
+      if (!existe) {
+
+        this.dataService.agregarDatosOrla(datosUsuario, this.nodo, nombre).subscribe(() => {
+
+          this.agregarProfesorOrla(nombre)
+          this.agregarAlumnoOrla(nombre)
+
+          this.snackBar.open('Nombre de orla añadida con éxito!', 'Cerrar', { duration: 3000 });
+          this.addOrlaForm.reset();
+          //window.location.reload();
+
+        }, error => {
+          console.error(error);
+          this.snackBar.open('Ocurrió un error al intentar agregar el nombre de la orla. Por favor intentelo nuevamente más tarde.', 'Cerrar', { duration: 3000 });
+        });
+      } else {
+        this.snackBar.open('Ya existe una orla con ese nombre!.', 'Cerrar', { duration: 3000 });
+      }
+    }, error => {
+      console.error(error);
+      this.snackBar.open('Error al comprobar si el alumno existe. Por favor intentelo nuevamente más tarde.', 'Cerrar', { duration: 3000 });
+    });
+  }
+
+  cancelarAdd(): void {
+    this.dialogRef.close(false);
+  }
 
 }
