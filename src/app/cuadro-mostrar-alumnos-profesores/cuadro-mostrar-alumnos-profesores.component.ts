@@ -77,6 +77,10 @@ export class CuadroMostrarAlumnosProfesoresComponent {
     });
   }
 
+  alMenosUnSeleccionado(): boolean {
+    return this.seleccionAlumno.hasValue() && this.seleccionProfesor.hasValue();
+  }
+
   applyFilterProfesor(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataProfesor.filterPredicate = (data: any, filter: string) => {
