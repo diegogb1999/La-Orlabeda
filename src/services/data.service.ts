@@ -13,9 +13,6 @@ import { FirebaseService } from './firebase.service';
 export class DataService {
 
   private firebaseUrl = 'DBURL_GOES_HERE/';
-  private readonly COOKIE_KEY = 'my_auth_token';
-  forma = this.authService.getToken();
-  //private apiUrl = 'https://tu-api.com/datos';
 
   constructor(private http: HttpClient, private authService: AuthService, private db: AngularFireDatabase, private cookieService: CookieService, firebaseService: FirebaseService) {
 
@@ -31,8 +28,7 @@ export class DataService {
   }
 
   obtenerDatos(nodo: string): Observable<any> {
-    const token = this.cookieService.get(this.COOKIE_KEY);
-    return this.http.get(`${this.firebaseUrl}/${nodo}.json?auth=${this.forma}`);
+    return this.http.get(`${this.firebaseUrl}/${nodo}.json?auth=${this.authService.getAuthTokenCookie()}`);
   }
 
   /*
@@ -46,14 +42,12 @@ export class DataService {
   */
 
   actualizarDatos(id: string, datosActualizados: any, nodo: string): Observable<any> {
-    const token = this.cookieService.get(this.COOKIE_KEY);
-    const url = `${this.firebaseUrl}${nodo}/${id}.json?auth=${this.forma}`;
+    const url = `${this.firebaseUrl}${nodo}/${id}.json?auth=${this.authService.getAuthTokenCookie()}`;
     return this.http.put<any>(url, datosActualizados);
   }
 
   eliminarRegistro(id: string, nodo: string): Observable<void> {
-    const token = this.cookieService.get(this.COOKIE_KEY);
-    const url = `${this.firebaseUrl}${nodo}/${id}.json?auth=${this.forma}`;
+    const url = `${this.firebaseUrl}${nodo}/${id}.json?auth=${this.authService.getAuthTokenCookie()}`;
     return this.http.delete<void>(url);
   }
 
@@ -143,16 +137,13 @@ export class DataService {
   }
 
   agregarDatosOrla(datos: any, nodo: string, nombre: string): Observable<any> {
-    const token = this.cookieService.get(this.COOKIE_KEY);
-    return this.http.put(`${this.firebaseUrl}/${nodo}/${nombre}.json?auth=${this.forma}`, datos);
+    return this.http.put(`${this.firebaseUrl}/${nodo}/${nombre}.json?auth=${this.authService.getAuthTokenCookie()}`, datos);
   }
   agregarProfesoresOrla(datos: any, nodo: string, nombreOrla: string): Observable<any> {
-    const token = this.cookieService.get(this.COOKIE_KEY);
-    return this.http.put(`${this.firebaseUrl}/${nodo}/${nombreOrla}/profesores.json?auth=${this.forma}`, datos);
+    return this.http.put(`${this.firebaseUrl}/${nodo}/${nombreOrla}/profesores.json?auth=${this.authService.getAuthTokenCookie()}`, datos);
   }
   agregarAlumnosOrla(datos: any, nodo: string, nombreOrla: string): Observable<any> {
-    const token = this.cookieService.get(this.COOKIE_KEY);
-    return this.http.put(`${this.firebaseUrl}/${nodo}/${nombreOrla}/alumnos.json?auth=${this.forma}`, datos);
+    return this.http.put(`${this.firebaseUrl}/${nodo}/${nombreOrla}/alumnos.json?auth=${this.authService.getAuthTokenCookie()}`, datos);
   }
   /*obtenerProfesoresPorId(id: string): Observable<any> {
     return this.http.get(`${this.firebaseUrl}/orlas/profesores/${id}.json?auth=${this.authService.getToken}`).pipe(
@@ -165,13 +156,11 @@ export class DataService {
 
 // Método para obtener un profesor por ID
 obtenerProfesorPorId(id: string): Observable<any> {
-  const token = this.cookieService.get(this.COOKIE_KEY);
-  return this.http.get(`${this.firebaseUrl}/profesores/${id}.json?auth=${this.forma}`);
+  return this.http.get(`${this.firebaseUrl}/profesores/${id}.json?auth=${this.authService.getAuthTokenCookie()}`);
 }
 
 obtenerAlumnoPorId(id: string): Observable<any> {
-  const token = this.cookieService.get(this.COOKIE_KEY);
-  return this.http.get(`${this.firebaseUrl}/alumnos/${id}.json?auth=${this.forma}`);
+  return this.http.get(`${this.firebaseUrl}/alumnos/${id}.json?auth=${this.authService.getAuthTokenCookie()}`);
 }
 
 }

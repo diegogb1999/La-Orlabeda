@@ -27,7 +27,7 @@
           <mat-card class="viewProfesores" *ngFor="let profesor of orla.profesores">
 
             <div class="imageProfesor">
-              <img mat-card-image class="example-header-image" [src]= 'profesor.imageUrl'>
+              <img mat-card-image class="example-header-image" [src]= "profesor?.imageUrl ?? '../../assets/interrogante.png'">
             </div>
             <mat-card-title>{{ profesor.nombre }}</mat-card-title>
             <mat-card-subtitle>{{ profesor.fechaNacimiento | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
@@ -40,7 +40,7 @@
           <mat-card class="viewAlumnos" *ngFor="let alumno of orla.alumnos">
 
             <div class="imageAlumno">
-              <img mat-card-image class="example-header-image" [src]= 'alumno.imageUrl'>
+              <img mat-card-image class="example-header-image" [src]= "alumno?.imageUrl ?? '../../assets/interrogante.png'">
             </div>
             <mat-card-title>{{ alumno.nombre }}</mat-card-title>
             <mat-card-subtitle>{{ alumno.fechaNacimiento | date: 'dd/MM/yyyy' }}</mat-card-subtitle>

@@ -59,7 +59,7 @@ openDeleteDialog(orla: any) {
   dialogRef.afterClosed().subscribe(result => {
     if (result) {
       this.eliminarOrla(orla);
-      this.snackBar.open('El alumno ha sido borrado con exito!', 'Cerrar', {
+      this.snackBar.open('La orla ha sido borrada con exito!', 'Cerrar', {
         duration: 3000,
         horizontalPosition: 'center',
       });
@@ -77,22 +77,22 @@ eliminarOrla(orla: any) {
 }
 
 getOrlasConDetalles() {
-  // Obtener las orlas primero
   return this.dataService.getOrlas().pipe(
     switchMap(orlas => {
-      // Mapear las orlas a observables que incluyen detalles de profesores y alumnos
       const orlasDetallesObservables = orlas.map(orla => {
-        // Observable para los detalles de profesores
-        const profesoresDetallesObservables = orla.profesores.map((profesorId: any) =>
+        // Detalles de profesores, transformando nulls en un objeto específico
+        const profesoresDetallesObservables = orla.profesores.map((profesorId: string) =>
           this.dataService.obtenerProfesorPorId(profesorId).pipe(
-            catchError(error => of({ id: profesorId, nombre: 'Profesor Desconocido' }))
+            catchError(error => of({ id: profesorId, nombre: 'Profesor no encontrado' })), // Objeto específico en caso de error
+            map(profesor => profesor ?? { id: profesorId, nombre: 'El profesor que estuvo aqui se eliminó' }) // También manejar caso de respuesta null explícita
           )
         );
 
-        // Observable para los detalles de alumnos
-        const alumnosDetallesObservables = orla.alumnos.map((alumnoId: any) =>
+        // Detalles de alumnos, transformando nulls en un objeto específico
+        const alumnosDetallesObservables = orla.alumnos.map((alumnoId: string) =>
           this.dataService.obtenerAlumnoPorId(alumnoId).pipe(
-            catchError(error => of({ id: alumnoId, nombre: 'Alumno Desconocido' }))
+            catchError(error => of({ id: alumnoId, nombre: 'Alumno no encontrado' })), // Objeto específico en caso de error
+            map(alumno => alumno ?? { id: alumnoId, nombre: 'El alumno que estuvo aqui se eliminó' }) // También manejar caso de respuesta null explícita
           )
         );
 
@@ -112,8 +112,8 @@ getOrlasConDetalles() {
       return forkJoin(orlasDetallesObservables);
     }),
     tap(orlasConDetalles => console.log('Orlas con detalles completos:', orlasConDetalles))
-    // ... manejo de errores ...
   );
 }
+
 
 }

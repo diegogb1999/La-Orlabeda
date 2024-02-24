@@ -1,5 +1,5 @@
 <div  class="botones">
-    <button mat-fab class="botonAddProfesor" (click) = "openAddProfesorDialog()">
+    <button mat-fab class="botonAddProfesor" (click) = "openAddProfesorDialog()" *ngIf="authService.isAuthenticated()">
         <mat-icon>add</mat-icon>
     </button>
 </div>

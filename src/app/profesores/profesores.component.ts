@@ -58,20 +58,22 @@ export class ProfesoresComponent {
     
     this.seviceStorage.deleteFile(profesor.imageUrl).then(() => {
       this.dataService.eliminarRegistro(profesor.id, 'profesores').subscribe(() => {
-        this.profesores = this.dataService.getProfesores();
+
       }, error => {
         //console.error("Error al eliminar el registro del profesor ya que no existe:", error);
         this.snackBar.open('Error al eliminar el profesor.', 'Cerrar', { duration: 3000 });
       });
+
     }).catch(error => {
       //console.error("La imagen no existe:", error);
       this.dataService.eliminarRegistro(profesor.id, 'profesores').subscribe(() => {
-        this.profesores = this.dataService.getProfesores();
+
       }, error => {
         this.snackBar.open('Error al eliminar el profesor.', 'Cerrar', { duration: 3000 });
       });
-        this.profesores = this.dataService.getProfesores(); // Actualizar lista de alumnos
+
     });
+    this.profesores = this.dataService.getProfesores();
   }
 
 
