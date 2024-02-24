@@ -1,0 +1,64 @@
+<div class="tituloAgregarAlumno">
+    <span>Agregar alumno</span>
+</div>
+
+<form class="formularioAgregarAlumno" [formGroup]="addAlumnoForm" (ngSubmit)="agregarAlumno()">
+
+    <div class="formAgregarAlumno">
+        <mat-form-field appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre">
+            <mat-error *ngIf="addAlumnoForm.get('nombre')?.errors?.['required']">El nombre del alumno es
+                requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Fecha de nacimiento</mat-label>
+            <input matInput [matDatepicker]="picker" (click)="picker.open()" formControlName="fechaNacimiento"
+                type="fechaNacimiento">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="addAlumnoForm.get('fechaNacimiento')?.errors?.['required']">La fecha de nacimiento es
+                requerida</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Edad</mat-label>
+            <input matInput formControlName="edad" type="edad">
+            <mat-error *ngIf="addAlumnoForm.get('edad')?.errors?.['required']">La edad es
+                requerida</mat-error>
+            <mat-error *ngIf="addAlumnoForm.get('edad')?.errors?.['pattern']">La edad debe ser un número comprendido
+                entre 0 y 100</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+
+            <mat-label>Grado</mat-label>
+            <mat-select formControlName="grado">
+                <mat-option value="DAM">DAM</mat-option>
+                <mat-option value="DAW">DAW</mat-option>
+                <mat-option value="ASIR">ASIR</mat-option>
+                <mat-option value="Estética integral">Estética integral</mat-option>
+                <mat-option value="Realización de espectáculos y audiovisuales">Realización de espectáculos y
+                    audiovisuales</mat-option>
+            </mat-select>
+            <mat-error *ngIf="addAlumnoForm.get('grado')?.errors?.['required']">El grado es
+                requerido</mat-error>
+        </mat-form-field>
+
+        <button class="botonCargar" type="button" mat-raised-button (click)="fileInput.click()">Foto</button>
+        <input hidden (change)="onFileSelected()" #fileInput type="file" id="file" accept="image/*">
+
+        <img class="imagePreview" *ngIf="srcResult" [src]="srcResult" style="max-width: 70px; max-height: 70px;"
+            alt="Image preview">
+    </div>
+
+
+    <div mat-dialog-actions class="contenedorBotonesAgregarAlumno">
+        <button mat-button [disabled]="!addAlumnoForm.valid || !fileSelected" tabindex="-1" class="aceptar"
+            type="submit">Agregar</button>
+        <button mat-button mat-dialog-close (click)="cancelarAdd()" tabindex="-1" class="denegar"
+            type="button">Cancelar</button>
+    </div>
+
+</form>

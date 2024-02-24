@@ -1,20 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PruebaComponent } from './prueba/prueba.component';
 import { perroGuard } from '../guards/perro.guard';
 import { InicioComponent } from './inicio/inicio.component';
+import { OrlasComponent } from './orlas/orlas.component';
+import { ProfesoresComponent } from './profesores/profesores.component';
+import { AlumnosComponent } from './alumnos/alumnos.component';
+import { LoginComponent } from './login/login.component';
+import { RegistroComponent } from './registro/registro.component';
 
 
 const routes: Routes = [
+  
+  { path: 'inicio', component: InicioComponent },
+  
+  { path: 'orlas', component: OrlasComponent }, //, canActivate: [perroGuard]
 
-  { path: '', component: InicioComponent },
-  // Ruta protegida con el guardián
-  { path: 'inicio', component: InicioComponent }, //canActivate: [perroGuard]
-  // Ruta pública
-  { path: 'login', component: PruebaComponent },
+  { path: 'profesores', component: ProfesoresComponent },
 
-  { path: 'register', component: PruebaComponent }
-  // Otras rutas...
+  { path: 'alumnos', component: AlumnosComponent },
+
+  { path: 'login', component: LoginComponent },
+
+  { path: 'registro', component: RegistroComponent },
+
+  { path: '**', redirectTo: '/inicio', pathMatch: 'full' }
 
 ];
 

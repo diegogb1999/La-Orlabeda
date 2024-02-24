@@ -1,31 +1,39 @@
-.icon-display {
-    transform: scale(1.5);
- }
- 
-mat-drawer-content {
-  height: 100%;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
 mat-drawer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background: #897632;
+    height: 100%;
     width: 150px;
 }
 
-.example-container{
+.sidenavContainer {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    column-gap: 20px;
+}
+
+.sidenavBot {
+    margin-top: auto;
+    overflow-y: hidden;
+}
+
+.copy {
+    width: 100%;
+    text-align: right;
+}
+
+.contenedorHead {
+    display: flex;
+    flex-direction: column;
     margin: 0;
     height: 100%;
     width: 100%;
     min-width: 100%;
     min-height: 100%;
     background: radial-gradient(circle, #a8caba 0%, #5d4157 100%);
-}
-
-.contenido {
-    display: block;
 }
 
 .header {
@@ -40,16 +48,32 @@ mat-drawer {
     margin: 30px;
 }
 
+button {
+    width: 100%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-top: 30px;
+}
+
 h1 {
     color: #1fec71;
     font-weight: bold;
     margin: 0;
-}
-.header h1 {
     font-family: 'Birdgo';
-    font-size: 50px;
-    position: absolute; /* Hace que el título se posicione de forma absoluta dentro de su contenedor relativo */
-    left: 50%; /* Centra el título exactamente en la mitad del contenedor */
-    transform: translateX(-50%); /* Ajusta el título hacia atrás a la mitad de su ancho para centrarlo perfectamente */
-    margin: 0; /* Asegura que no haya margen adicional afectando el centrado */
+    font-size: 70px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+}
+
+.active-link {
+    font-weight: bold;
+}
+
+.anim-wrapper {
+    flex: 1;
+    //position: relative;
+    //overflow: hidden;
+    //min-height: 100%; 
 }

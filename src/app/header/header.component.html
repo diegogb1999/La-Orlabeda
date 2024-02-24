@@ -1,27 +1,54 @@
-<mat-drawer-container class="example-container" autosize hasBackdrop>
-  
-  <div class = "header">
-  <button mat-icon-button class="botonMenu" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
-    <mat-icon class="iconoMenu">menu</mat-icon>
-  </button>
+<mat-drawer-container class="contenedorHead" autosize hasBackdrop>
 
-  <h1>La Orlabeda</h1>
-</div>
+  <div class="header">
+    <button mat-icon-button class="botonMenu" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
+      <mat-icon class="iconoMenu">menu</mat-icon>
+    </button>
 
-  <mat-drawer #drawer mode="over">
-    <button mat-button routerLink="/login" routerLinkActive="active">
-      <mat-icon>person</mat-icon>Iniciar Sesión</button>
-    <mat-divider></mat-divider>
-    <button mat-button routerLink="/" routerLinkActive="active">
-      <mat-icon>tag</mat-icon>Productos</button>
-    <mat-divider></mat-divider>
-    <button mat-button routerLink="/" routerLinkActive="active">
-      <mat-icon>money-bill</mat-icon>Facturas</button>
-    <mat-divider></mat-divider>
+    <h1>La Orlabeda</h1>
+
+  </div>
+
+  <mat-drawer #drawer mode="side">
+
+    <div class="sidenavContainer">
+
+      <div class="sidenavTop">
+
+        <button mat-button routerLink="/inicio" routerLinkActive="active-link" tabindex="-1">
+          <mat-icon>home</mat-icon>Inicio</button>
+
+        <button mat-button routerLink="/orlas" routerLinkActive="active-link" tabindex="-1">
+          <mat-icon>school</mat-icon>Orlas</button>
+
+        <button mat-button routerLink="/profesores" routerLinkActive="active-link" tabindex="-1">
+          <mat-icon>hail</mat-icon>Profesores</button>
+
+        <button mat-button routerLink="/alumnos" routerLinkActive="active-link" tabindex="-1">
+          <mat-icon>emoji_people</mat-icon>Alumnos</button>
+
+      </div>
+
+      <div class="sidenavBot">
+
+        <button *ngIf="!authService.isAuthenticated()" class="login" mat-button routerLink="/login"
+          routerLinkActive="active-link" tabindex="-1">
+          <mat-icon>login</mat-icon>Iniciar Sesión</button>
+
+        <button *ngIf="authService.isAuthenticated()" class="logout" mat-button (click)="logout()" tabindex="-1">
+          <mat-icon>logout</mat-icon>Cerrar Sesión</button>
+
+        <button *ngIf="!authService.isAuthenticated()" class="registro" mat-button routerLink="/registro"
+          routerLinkActive="active-link" tabindex="-1">
+          <mat-icon>person_add</mat-icon>Registro</button>
+      </div>
+
+    </div>
+
   </mat-drawer>
 
-  <div class = "contenido">
-    <router-outlet></router-outlet>
+  <div [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''" class="anim-wrapper">
+    <router-outlet #o="outlet"></router-outlet>
   </div>
 
 </mat-drawer-container>

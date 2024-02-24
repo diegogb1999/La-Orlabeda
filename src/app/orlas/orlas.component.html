@@ -1,0 +1,59 @@
+<div *ngIf="authService.isAuthenticated()" class="botones">
+  <button mat-fab class="botonAddOrla" (click)="openAddOrlaDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<div class="contenedor">
+
+  <mat-card class="view" *ngFor="let orla of orlas | async">
+
+    <div class="contenedorTituloBoton">
+
+      <mat-card-title class="nombreOrla">{{ orla.nombre }}</mat-card-title>
+
+      <div class="contenedorBotonEliminar" *ngIf="authService.isAuthenticated()">
+        <button mat-fab class="botonEliminarOrla" (click)="openDeleteDialog(orla)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+
+
+
+    <mat-card-content>
+      <div class="tarjetas">
+        <div class="bloqueProfesores">
+          <mat-card class="viewProfesores" *ngFor="let profesor of orla.profesores">
+
+            <div class="imageProfesor">
+              <img mat-card-image class="example-header-image"
+                [src]="profesor?.imageUrl ?? '../../assets/interrogante.png'">
+            </div>
+            <mat-card-title>{{ profesor.nombre }}</mat-card-title>
+            <mat-card-subtitle>{{ profesor.fechaNacimiento | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
+            <mat-card-subtitle>{{ profesor.departamento }}</mat-card-subtitle>
+
+          </mat-card>
+        </div>
+
+        <div class="bloqueAlumnos">
+          <mat-card class="viewAlumnos" *ngFor="let alumno of orla.alumnos">
+
+            <div class="imageAlumno">
+              <img mat-card-image class="example-header-image"
+                [src]="alumno?.imageUrl ?? '../../assets/interrogante.png'">
+            </div>
+            <mat-card-title>{{ alumno.nombre }}</mat-card-title>
+            <mat-card-subtitle>{{ alumno.fechaNacimiento | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
+            <mat-card-subtitle>{{ alumno.grado }}</mat-card-subtitle>
+
+          </mat-card>
+        </div>
+      </div>
+
+    </mat-card-content>
+
+  </mat-card>
+
+</div>

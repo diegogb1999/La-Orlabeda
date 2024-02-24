@@ -1,0 +1,158 @@
+.botones {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  gap: 30px;
+}
+
+.botonAddOrla {
+  background-color: white;
+  color: #00ff00;
+  height: 35px;
+  width: 35px;
+  margin-top: 30px;
+}
+
+.botonEliminarOrla {
+  background-color: white;
+  color: #ff0000;
+  height: 35px;
+  width: 35px;
+}
+
+
+.nombreOrla {
+  font-size: 50px;
+  font-family: 'Cascadia';
+
+}
+
+.contenedor {
+  height: 100%;
+  width: 100%;
+  margin-top: 50px;
+  display: flex;
+  gap: 50px;
+  flex-direction: row;
+  flex-flow: wrap;
+  align-items: center;
+  align-content: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+
+}
+
+.view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: space-evenly;
+  height: fit-content;
+  max-width: 95%;
+  background-color: #ebe68d;
+  border-radius: 25px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.viewProfesores {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  height: 340px;
+  width: 230px;
+  background-color: #ebe68d;
+  border-radius: 25px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  padding: 0;
+  overflow: hidden;
+}
+
+.viewAlumnos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  height: 310px;
+  width: 170px;
+  background-color: #ebe68d;
+  border-radius: 25px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  padding: 0;
+  overflow: hidden;
+}
+
+.tarjetas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  padding: 0;
+}
+
+.bloqueProfesores {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: space-evenly;
+  gap: 25px;
+  width: 100%;
+  height: fit-content;
+  text-align: center;
+  padding: 0;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.bloqueAlumnos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: space-evenly;
+  gap: 25px;
+  width: 100%;
+  margin-top: 40px;
+  height: fit-content;
+  text-align: center;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.contenedorTituloBoton {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.contenedorBotonEliminar {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 30px;
+}
+
+img {
+  width: 100px;
+  height: 150px;
+}

@@ -1,18 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { 
-    height: 100%;
-    background-color: #392e0e;
- }
+html,
+body {
+   height: 100%;
+   margin: 0;
+   padding: 0;
+   background-color: #392e0e;
+}
 
- body {
-    margin: 0;
-    font-family: 'Cascadia';
- }
+::-webkit-scrollbar {
+   width: 7px;
+}
 
- .active {
-    transform: scale(1.2);
-    font-weight: bold;
+::-webkit-scrollbar-track {
+   border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+   background: #bdbcbc;
+   border-radius: 10px;
+   border: 1px solid rgb(1, 1, 1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+   background: #555;
+}
+
+
+body {
+   margin: 0;
+   font-family: 'Cascadia';
+}
+
+.active {
+   transform: scale(1.2);
+   font-weight: bold;
 }
 
 @font-face {
@@ -24,4 +46,3 @@ html, body {
    font-family: 'Cascadia';
    src: url('assets/Cascadia.ttf');
 }
-

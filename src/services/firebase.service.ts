@@ -16,11 +16,10 @@ export class FirebaseService {
   constructor() { }
 
   private initializeFirebase() {
-    // Verifica si ya existen instancias de la aplicación de Firebase para evitar errores de inicialización múltiple
     if (!getApps().length) {
       return initializeApp(environment.firebase);
     } else {
-      return getApp(); // Si ya está inicializada, retorna la instancia existente
+      return getApp();
     }
   }
 
