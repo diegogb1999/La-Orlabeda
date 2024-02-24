@@ -155,7 +155,7 @@ export class CuadroMostrarAlumnosProfesoresComponent {
           this.agregarProfesorOrla(nombre)
           this.agregarAlumnoOrla(nombre)
 
-          this.snackBar.open('Nombre de orla añadida con éxito!', 'Cerrar', { duration: 3000 });
+          this.snackBar.open('Orla añadida con éxito!', 'Cerrar', { duration: 3000 });
           this.addOrlaForm.reset();
           this.dialogRef.close(true);
           //window.location.reload();
