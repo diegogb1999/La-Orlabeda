@@ -3,6 +3,7 @@ import { FirebaseService } from './firebase.service';
 import { signOut } from 'firebase/auth';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { CookieService } from 'ngx-cookie-service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 
@@ -14,7 +15,7 @@ export class AuthService {
 
   private readonly COOKIE_KEY = 'my_auth_token';
 
-  constructor(protected cookieService: CookieService, private firebaseService: FirebaseService, private afAuth: AngularFireAuth) { }
+  constructor(private snackBar: MatSnackBar, protected cookieService: CookieService, private firebaseService: FirebaseService, private afAuth: AngularFireAuth) { }
 
   register(email: string, password: string): Promise<boolean> {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
@@ -80,6 +81,21 @@ export class AuthService {
 
   getAuthTokenCookie(): string | undefined {
     return this.cookieService.get(this.COOKIE_KEY);
+  }
+
+  loadAcc(): void {
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        user.getIdToken().then(token => {
+          this.cookieService.set(this.COOKIE_KEY, token);
+          this.snackBar.open('Bienvenido ', 'Cerrar', { duration: 3000 });
+        }).catch(error => {
+          console.error('Error obteniendo el token del usuario:', error);
+        });
+      } else {
+        this.snackBar.open('Bienvenido usuario!.', 'Cerrar', { duration: 3000 });
+      }
+    });
   }
 
 }

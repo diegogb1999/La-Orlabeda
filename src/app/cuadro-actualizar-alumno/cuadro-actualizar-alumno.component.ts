@@ -69,7 +69,7 @@ export class CuadroActualizarAlumnoComponent {
               this.dialogRef.close(true);
             }, error => {
               console.error(error);
-              this.snackBar.open('Ocurrió un error al intentar agregar el alumno. Por favor intentelo nuevamente más tarde.', 'Cerrar', { duration: 3000 });
+              this.snackBar.open('Ocurrió un error al intentar editar el alumno. Por favor intentelo nuevamente más tarde.', 'Cerrar', { duration: 3000 });
             });
 
           } else {

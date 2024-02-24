@@ -67,7 +67,7 @@ export class CuadroActualizarProfesorComponent {
               this.dialogRef.close(true);
             }, error => {
               console.error(error);
-              this.snackBar.open('Ocurrió un error al intentar agregar el profesor. Por favor intentelo nuevamente más tarde.', 'Cerrar', { duration: 3000 });
+              this.snackBar.open('Ocurrió un error al intentar editar el profesor. Por favor intentelo nuevamente más tarde.', 'Cerrar', { duration: 3000 });
             });
 
           } else {
