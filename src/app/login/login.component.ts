@@ -25,9 +25,6 @@ export class LoginComponent {
       const { email, password } = this.loginForm.value;
       try {
         await this.authService.login(email, password);
-        this.snackBar.open('Inicio de sesión exitoso!', 'Cerrar', {
-          duration: 3000,
-        });
         this.loginForm.reset();
 
         this.router.navigate(['/inicio']);

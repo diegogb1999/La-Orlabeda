@@ -26,9 +26,6 @@ export class RegistroComponent {
       const { email, password } = this.registerForm.value;
       try {
         const token = await this.authService.register(email, password);
-        this.snackBar.open('Registro completado con éxito!', 'Cerrar', {
-          duration: 3000,
-        });
         this.registerForm.reset();
 
         this.router.navigate(['/inicio']);

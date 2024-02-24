@@ -23,14 +23,28 @@ export class AuthService {
         if (result.user) {
           return result.user.getIdToken().then((token) => {
             this.cookieService.set(this.COOKIE_KEY, token);
+            this.snackBar.open('Registro completado con éxito!', 'Cerrar', {
+              duration: 3000,
+            });
             return true;
           });
         } else {
+          this.snackBar.open('Error al registrarse. Por favor verifica tus credenciales e intenta nuevamente.', 'Cerrar', {
+            duration: 3000,
+          });
           throw new Error('No user found');
         }
       })
       .catch((error) => {
-        console.error('Error en el registro:', error);
+        if (error.code === 'auth/email-already-in-use') {
+          this.snackBar.open('El correo electrónico ya está en uso. Por favor, intenta con uno diferente.', 'Cerrar', {
+            duration: 3000,
+          });
+        } else {
+          this.snackBar.open('Error no especificado, intentelo de nuevo mas tarde.', 'Cerrar', {
+            duration: 3000,
+          });
+        }
         return false;
       });
   }
@@ -46,14 +60,24 @@ export class AuthService {
         if (result.user) {
           return result.user.getIdToken().then((token) => {
             this.cookieService.set(this.COOKIE_KEY, token);
-            return true; 
+            this.snackBar.open('Inicio de sesión correcto!', 'Cerrar', {
+              duration: 3000,
+            });
+            return true;
           });
         } else {
+          this.snackBar.open('Error al iniciar sesión. Por favor verifica tus credenciales e intenta nuevamente.', 'Cerrar', {
+            duration: 3000,
+          });
           throw new Error('No user found');
+
         }
       })
       .catch((error) => {
-        console.error('Error en la autenticación:', error);
+        console.log(error);
+        this.snackBar.open('Error inesperado. Intentalo de nuevo mas tarde.', 'Cerrar', {
+          duration: 3000,
+        });
         return false;
       });
   }
@@ -88,12 +112,12 @@ export class AuthService {
       if (user) {
         user.getIdToken().then(token => {
           this.cookieService.set(this.COOKIE_KEY, token);
-          this.snackBar.open('Bienvenido ', 'Cerrar', { duration: 3000 });
+          console.log('Bienvenido usuario logeado')
         }).catch(error => {
           console.error('Error obteniendo el token del usuario:', error);
         });
       } else {
-        this.snackBar.open('Bienvenido usuario!.', 'Cerrar', { duration: 3000 });
+        console.log('Bienvenido usuario sin logear')
       }
     });
   }
