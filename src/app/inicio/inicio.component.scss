@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     height: 100%;
     width: 100%;
     margin: 0;
@@ -18,22 +19,20 @@ html, body {
     flex-direction: column;
     align-items: center;
     margin-top: 100px;
-    width: 270px; /* Ajusta al tamaño deseado para tu logo */
-    height: 270px; /* Esto mantendrá la proporción de aspecto del logo */
+    width: 270px;
+    height: 270px;
     animation: respirar 5s ease-in-out infinite;
-    transition: filter 0.3s ease-in-out; /* Suaviza la transición del filtro */
-}
-
-.logo:hover {
-    filter: brightness(1.7); /* Aumenta el brillo al pasar el ratón por encima */
+    transition: filter 0.3s ease-in-out;
 }
 
 @keyframes respirar {
-    0%, 100% {
-      transform: scale(1);
+
+    0%,
+    100% {
+        transform: scale(1);
     }
+
     50% {
-      transform: scale(1.3); /* Ajusta este valor para cambiar la intensidad de la "respiración" */
+        transform: scale(1.3);
     }
 }
-

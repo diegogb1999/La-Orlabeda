@@ -5,7 +5,6 @@ import { InicioComponent } from './inicio/inicio.component';
 import { OrlasComponent } from './orlas/orlas.component';
 import { ProfesoresComponent } from './profesores/profesores.component';
 import { AlumnosComponent } from './alumnos/alumnos.component';
-import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 
@@ -25,7 +24,6 @@ const routes: Routes = [
   { path: 'registro', component: RegistroComponent },
 
   { path: '**', redirectTo: '/inicio', pathMatch: 'full' }
-  // Otras rutas...
 
 ];
 

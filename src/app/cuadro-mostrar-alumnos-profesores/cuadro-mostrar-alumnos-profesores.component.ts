@@ -1,12 +1,10 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/services/auth.service';
 import { FirebaseStorageService } from 'src/services/firebase-storage.service';
-import { ProfesoresComponent } from '../profesores/profesores.component';
 import { DataService } from 'src/services/data.service';
-import { AlumnosComponent } from '../alumnos/alumnos.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { Alumno } from 'src/clases/Alumno';
@@ -51,8 +49,6 @@ export class CuadroMostrarAlumnosProfesoresComponent {
 
 
   ngOnInit(): void {
-    //const alumnos = this.dataService.getAlumnos();
-    //const profesores = this.dataService.getProfesores();
     this.dataService.getAlumnos().subscribe(alumnos => {
       this.dataAlumno = new MatTableDataSource(alumnos);
       this.dataAlumno.sort = this.alumnoSort;
@@ -118,14 +114,10 @@ export class CuadroMostrarAlumnosProfesoresComponent {
   }
 
   agregarAlumnoOrla(nombre: string): void {
-    //this.eliminarProduccion(produccion);
     const alumnosSeleccionados = this.seleccionAlumno.selected.map(p => p.id);
-    // Aquí, puedes llamar a tu servicio para agregar los alumnos seleccionados a la base de datos.
-    // Por ejemplo:
     this.dataService.agregarAlumnosOrla(alumnosSeleccionados, this.nodo, nombre).subscribe({
       next: (result) => {
         console.log("Alumnos agregados con éxito", result);
-        // Aquí puedes limpiar la selección si lo deseas
         this.seleccionAlumno.clear();
 
       },
@@ -134,14 +126,10 @@ export class CuadroMostrarAlumnosProfesoresComponent {
   }
 
   agregarProfesorOrla(nombre: string): void {
-    //this.eliminarProduccion(produccion);
     const profesoresSeleccionados = this.seleccionProfesor.selected.map(id => id.id);
-    // Aquí, puedes llamar a tu servicio para agregar los alumnos seleccionados a la base de datos.
-    // Por ejemplo:
     this.dataService.agregarProfesoresOrla(profesoresSeleccionados, this.nodo, nombre).subscribe({
       next: (result) => {
         console.log("Profesores agregados con éxito", result);
-        // Aquí puedes limpiar la selección si lo deseas
         this.seleccionProfesor.clear();
 
       },

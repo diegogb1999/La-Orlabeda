@@ -39,24 +39,26 @@
                 <mat-option value="Imagen personal">Imagen personal</mat-option>
                 <mat-option value="Imagen y sonido">Imagen y sonido</mat-option>
                 <mat-option value="FOL">FOL</mat-option>
-                
+
             </mat-select>
             <mat-error *ngIf="addProfesorForm.get('departamento')?.errors?.['required']">El grado es
                 requerido</mat-error>
         </mat-form-field>
-        
+
         <button class="botonCargar" type="button" mat-raised-button (click)="fileInput.click()">Foto</button>
         <input hidden (change)="onFileSelected()" #fileInput type="file" id="file" accept="image/*">
-        
-        
-        <!-- Previsualización de la imagen -->
-        <img class="imagePreview" *ngIf="srcResult" [src]="srcResult" style="max-width: 70px; max-height: 70px;" alt="Image preview">
+
+
+        <img class="imagePreview" *ngIf="srcResult" [src]="srcResult" style="max-width: 70px; max-height: 70px;"
+            alt="Image preview">
     </div>
 
 
     <div mat-dialog-actions class="contenedorBotonesAgregarProfesor">
-        <button mat-button [disabled]="!addProfesorForm.valid || !fileSelected" tabindex="-1" class="aceptar" type="submit">Agregar</button>
-        <button mat-button mat-dialog-close (click)="cancelarAdd()" tabindex="-1" class="denegar" type="button">Cancelar</button>
+        <button mat-button [disabled]="!addProfesorForm.valid || !fileSelected" tabindex="-1" class="aceptar"
+            type="submit">Agregar</button>
+        <button mat-button mat-dialog-close (click)="cancelarAdd()" tabindex="-1" class="denegar"
+            type="button">Cancelar</button>
     </div>
 
 </form>

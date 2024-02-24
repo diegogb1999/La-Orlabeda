@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Alumno } from 'src/clases/Alumno';
 import { CuadroAgregarAlumnoComponent } from '../cuadro-agregar-alumno/cuadro-agregar-alumno.component';
-import { Subscription, catchError, forkJoin, map, of, switchMap } from 'rxjs';
 import { DataService } from 'src/services/data.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AuthService } from 'src/services/auth.service';
@@ -20,7 +19,7 @@ export class AlumnosComponent {
   alumnos: any;
 
 
-  constructor(public dialog: MatDialog, private dataService: DataService, private storage: AngularFireStorage, protected authService: AuthService, protected seviceStorage: FirebaseStorageService, private snackBar: MatSnackBar) {
+  constructor(public dialog: MatDialog, private dataService: DataService, protected authService: AuthService, protected seviceStorage: FirebaseStorageService, private snackBar: MatSnackBar) {
   }
   ngAfterViewInit() {
     this.alumnos = this.dataService.getAlumnos();
@@ -44,19 +43,18 @@ export class AlumnosComponent {
     const dialogRef = this.dialog.open(CuadroActualizarAlumnoComponent, {
       width: '1000px',
       height: '600px',
-      data: { alumno: alumno } // Pasamos el alumno seleccionado al diálogo
+      data: { alumno: alumno }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Aquí puedes manejar el resultado del diálogo, por ejemplo, actualizar la lista de alumnos
         this.alumnos = this.dataService.getAlumnos();
       }
     });
   }
 
   eliminarAlumno(alumno: any) {
-    
+
     this.seviceStorage.deleteFile(alumno.imageUrl).then(() => {
       this.dataService.eliminarRegistro(alumno.id, 'alumnos').subscribe(() => {
         this.alumnos = this.dataService.getAlumnos();
@@ -71,7 +69,7 @@ export class AlumnosComponent {
       }, error => {
         this.snackBar.open('Error al eliminar el alumno.', 'Cerrar', { duration: 3000 });
       });
-        this.alumnos = this.dataService.getAlumnos(); // Actualizar lista de alumnos
+      this.alumnos = this.dataService.getAlumnos();
     });
   }
 

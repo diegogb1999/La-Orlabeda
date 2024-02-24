@@ -25,7 +25,7 @@ mat-drawer {
     text-align: right;
 }
 
-.contenedorHead{
+.contenedorHead {
     display: flex;
     flex-direction: column;
     margin: 0;
@@ -61,19 +61,19 @@ h1 {
     margin: 0;
     font-family: 'Birdgo';
     font-size: 70px;
-    position: absolute; /* Hace que el título se posicione de forma absoluta dentro de su contenedor relativo */
-    left: 50%; /* Centra el título exactamente en la mitad del contenedor */
-    transform: translateX(-50%); /* Ajusta el título hacia atrás a la mitad de su ancho para centrarlo perfectamente */
-    margin: 0; /* Asegura que no haya margen adicional afectando el centrado */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
 }
 
 .active-link {
-    font-weight: bold; /* Cambia esto por el color que prefieras */
- }
+    font-weight: bold;
+}
 
- .anim-wrapper {
+.anim-wrapper {
     flex: 1;
     //position: relative;
     //overflow: hidden;
     //min-height: 100%; 
-  }
+}

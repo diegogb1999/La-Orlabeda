@@ -1,89 +1,91 @@
 .botonAddAlumnoOrla {
-    background-color: white;
-    color: #00ff00;
-    height: 35px;
-    width: 35px;
-  }
+  background-color: white;
+  color: #00ff00;
+  height: 35px;
+  width: 35px;
+}
 
-  .tablas {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    text-align: center;
-  }
+.tablas {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+}
 
-  th {
-    font-size: 20px;
-    text-align: center;
-    color: #17181f;
-  }
-  ::ng-deep .mat-sort-header-container {
-    flex-direction: column; /* Cambia la disposición a vertical */
-    align-items: flex-start; /* Alinea los elementos al inicio para mantener el texto alineado a la izquierda */
-  }
-  ::ng-deep .mat-sort-header-arrow {
-    transform: translateY(0px) !important; /* Ajusta según sea necesario */
-    margin-top: 4px; /* Añade un pequeño margen arriba de la flecha para separarla del texto */
-  }
+th {
+  font-size: 20px;
+  text-align: center;
+  color: #17181f;
+}
 
-  td {
-    text-align: center;
-  }
+::ng-deep .mat-sort-header-container {
+  flex-direction: column;
+  align-items: flex-start;
+}
 
-  table {
-    width: 600px;
-    max-height: 350px;
-    margin-top: 10px;
-  }
-  
-  span {
-    font-size: 30px;
-    font-family: 'Cascadia';
-    margin-top: 30px;
-  }
+::ng-deep .mat-sort-header-arrow {
+  transform: translateY(0px) !important;
+  margin-top: 4px;
+}
 
-  .tituloProfesor {
-    margin-top: 20px;
-  }
+td {
+  text-align: center;
+}
 
-  .tituloAlumno {
-    margin-top: 20px;
-  }
+table {
+  width: 600px;
+  max-height: 350px;
+  margin-top: 10px;
+}
 
-  .contenedorBotonesAgregarOrla {
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-    margin-top: 13px;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-  }
+span {
+  font-size: 30px;
+  font-family: 'Cascadia';
+  margin-top: 30px;
+}
 
-  .filtro {
-    margin-top: 20px;
-  }
+.tituloProfesor {
+  margin-top: 20px;
+}
 
-  .nombreOrla {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    margin-top: 13px;
-  }
+.tituloAlumno {
+  margin-top: 20px;
+}
 
-  .aceptar {
-    background-color: #00ff00;
-    margin-right: 50px;
-  
-  }
-  
-  .denegar {
-    background-color: red;
-    margin-left: 50px;
-  }
+.contenedorBotonesAgregarOrla {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  margin-top: 13px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
 
-  mat-paginator {
-    margin-top: 20px;
-  }
+.filtro {
+  margin-top: 20px;
+}
+
+.nombreOrla {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin-top: 13px;
+}
+
+.aceptar {
+  background-color: #00ff00;
+  margin-right: 50px;
+
+}
+
+.denegar {
+  background-color: red;
+  margin-left: 50px;
+}
+
+mat-paginator {
+  margin-top: 20px;
+}

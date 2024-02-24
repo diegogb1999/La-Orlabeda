@@ -1,47 +1,46 @@
 .formEditarProfesor {
-    margin: 0px;
-    padding: 40px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-evenly;
-    gap: 80px 100px;
-  }
+  margin: 0px;
+  padding: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 80px 100px;
+}
 
-  .tituloEditarProfesor {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 13px;
-    font-size: 32px;
-    font-family: 'Cascadia';
-  }
-  
-  mat-form-field {
-    width: 40%;
-  }
-  
-  .contenedorBotonesEditarProfesor {
-    margin-top: 35px;
-    justify-content: center;
-    gap: 150px;
-  }
-  
-  .actualizar {
-    background-color: #00ff00;
-    margin-right: 50px;
-  
-  }
-  
-  .denegar {
-    background-color: red;
-    margin-left: 50px;
-  }
+.tituloEditarProfesor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 13px;
+  font-size: 32px;
+  font-family: 'Cascadia';
+}
 
-  .linkImagen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
+mat-form-field {
+  width: 40%;
+}
+
+.contenedorBotonesEditarProfesor {
+  margin-top: 35px;
+  justify-content: center;
+  gap: 150px;
+}
+
+.actualizar {
+  background-color: #00ff00;
+  margin-right: 50px;
+
+}
+
+.denegar {
+  background-color: red;
+  margin-left: 50px;
+}
+
+.linkImagen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

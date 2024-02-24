@@ -1,4 +1,4 @@
-import { MatDialogRef, MAT_DIALOG_DATA } from'@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, Inject } from '@angular/core';
 
 @Component({
@@ -14,7 +14,7 @@ export class CuadroEliminarProfesorComponent {
   }
 
   confirmarEliminacion(): void {
-    this.dialogRef.close(true); 
+    this.dialogRef.close(true);
   }
 
   cancelarEliminacion(): void {

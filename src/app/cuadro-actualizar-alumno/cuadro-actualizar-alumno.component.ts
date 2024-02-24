@@ -1,13 +1,10 @@
 import { Component, ViewChild, ElementRef, Inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthService } from 'src/services/auth.service';
 import { DataService } from 'src/services/data.service';
 import { FirebaseStorageService } from 'src/services/firebase-storage.service';
-import { finalize } from 'rxjs/operators';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-cuadro-actualizar-alumno',
@@ -21,10 +18,10 @@ export class CuadroActualizarAlumnoComponent {
   nodo: string = "alumnos";
 
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private snackBar: MatSnackBar, private storageService: FirebaseStorageService, private dataService: DataService, private dialogRef: MatDialogRef<CuadroActualizarAlumnoComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
-    
-      this.initForm();
-      this.srcResult = this.data.alumno.imageUrl;
+  constructor(private snackBar: MatSnackBar, private storageService: FirebaseStorageService, private dataService: DataService, private dialogRef: MatDialogRef<CuadroActualizarAlumnoComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+
+    this.initForm();
+    this.srcResult = this.data.alumno.imageUrl;
   }
 
   initForm(): void {
@@ -36,7 +33,6 @@ export class CuadroActualizarAlumnoComponent {
         Validators.pattern(/^\d+$/)
       ]),
       grado: new FormControl(this.data.alumno.grado, Validators.required)
-      // Añade aquí otros campos según necesites
     });
   }
 
@@ -56,17 +52,16 @@ export class CuadroActualizarAlumnoComponent {
         this.dataService.existeAlumnoPorNombre(nombre).subscribe(async existe => {
 
           if (!existe || (existe && this.data.alumno.nombreParaComparar == nombre.toLowerCase())) {
-            // Si el alumno no existe, procede con la lógica de agregar alumno
+ 
             const file = this.fileInput.nativeElement.files[0];
 
-            if (file) { 
-            const filePath = `fotosAlumno/${file.name}`;
-            imageUrl = await this.storageService.uploadFile(filePath, file);
+            if (file) {
+              const filePath = `fotosAlumno/${file.name}`;
+              imageUrl = await this.storageService.uploadFile(filePath, file);
             }
 
             const datosUsuario = { nombre, fechaNacimiento, edad, grado, imageUrl, nombreParaComparar };
 
-            // Guarda los datos del usuario en Firebase Realtime Database
             this.dataService.actualizarDatos(this.data.alumno.id, datosUsuario, this.nodo).subscribe(() => {
               this.snackBar.open('Alumno actualizado con éxito!', 'Cerrar', { duration: 3000 });
               this.editarAlumnoForm.reset();
@@ -101,17 +96,16 @@ export class CuadroActualizarAlumnoComponent {
     const inputNode = document.querySelector('#file') as HTMLInputElement;
 
     if (typeof FileReader !== 'undefined' && inputNode && inputNode.files && inputNode.files.length > 0) {
-      this.fileSelected = true; // Actualiza aquí
+      this.fileSelected = true;
       const reader = new FileReader();
 
       reader.onload = (e: ProgressEvent<FileReader>) => {
-        // Asegúrate de que e.target no sea null utilizando el operador ?.
         this.srcResult = e.target?.result;
       };
 
       reader.readAsDataURL(inputNode.files[0]);
     } else {
-      this.fileSelected = false; // Asegúrate de manejar el caso donde no hay archivo
+      this.fileSelected = false; 
     }
   }
 

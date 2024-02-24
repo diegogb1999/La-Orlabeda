@@ -5,9 +5,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/services/auth.service';
 import { DataService } from 'src/services/data.service';
 import { FirebaseStorageService } from 'src/services/firebase-storage.service';
-import { finalize } from 'rxjs/operators';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cuadro-agregar-alumno',
@@ -45,15 +42,12 @@ export class CuadroAgregarAlumnoComponent {
         this.dataService.existeAlumnoPorNombre(nombre).subscribe(async existe => {
 
           if (!existe) {
-            // Si el alumno no existe, procede con la lógica de agregar alumno
             const file = this.fileInput.nativeElement.files[0];
             const filePath = `fotosAlumno/${file.name}`;
 
-            // Sube la imagen a Firebase Storage y obtiene la URL
             const imageUrl = await this.storageService.uploadFile(filePath, file);
             const datosUsuario = { nombre, fechaNacimiento, edad, grado, imageUrl, nombreParaComparar };
 
-            // Guarda los datos del usuario en Firebase Realtime Database
             this.dataService.agregarDatos(datosUsuario, this.nodo).subscribe(() => {
               this.snackBar.open('Alumno añadido con éxito!', 'Cerrar', { duration: 3000 });
               this.addAlumnoForm.reset();
@@ -93,13 +87,12 @@ export class CuadroAgregarAlumnoComponent {
       const reader = new FileReader();
 
       reader.onload = (e: ProgressEvent<FileReader>) => {
-        // Asegúrate de que e.target no sea null utilizando el operador ?.
         this.srcResult = e.target?.result;
       };
 
       reader.readAsDataURL(inputNode.files[0]);
     } else {
-      this.fileSelected = false; // Asegúrate de manejar el caso donde no hay archivo
+      this.fileSelected = false; 
     }
   }
 }

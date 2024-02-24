@@ -1,13 +1,9 @@
 import { Component, ViewChild, ElementRef, Inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthService } from 'src/services/auth.service';
 import { DataService } from 'src/services/data.service';
 import { FirebaseStorageService } from 'src/services/firebase-storage.service';
-import { finalize } from 'rxjs/operators';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cuadro-actualizar-profesor',
@@ -21,10 +17,10 @@ export class CuadroActualizarProfesorComponent {
   nodo: string = "profesores";
 
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private snackBar: MatSnackBar, private storageService: FirebaseStorageService, private dataService: DataService, private dialogRef: MatDialogRef<CuadroActualizarProfesorComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
-    
-      this.initForm();
-      this.srcResult = this.data.profesor.imageUrl;
+  constructor(private snackBar: MatSnackBar, private storageService: FirebaseStorageService, private dataService: DataService, private dialogRef: MatDialogRef<CuadroActualizarProfesorComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+
+    this.initForm();
+    this.srcResult = this.data.profesor.imageUrl;
   }
 
   initForm(): void {
@@ -36,7 +32,6 @@ export class CuadroActualizarProfesorComponent {
         Validators.pattern(/^\d+$/)
       ]),
       departamento: new FormControl(this.data.profesor.departamento, Validators.required)
-      // Añade aquí otros campos según necesites
     });
   }
 
@@ -56,17 +51,15 @@ export class CuadroActualizarProfesorComponent {
         this.dataService.existeProfesorPorNombre(nombre).subscribe(async existe => {
 
           if (!existe || (existe && this.data.profesor.nombreParaComparar == nombre.toLowerCase())) {
-            // Si el alumno no existe, procede con la lógica de agregar alumno
             const file = this.fileInput.nativeElement.files[0];
 
-            if (file) { 
-            const filePath = `fotosProfesor/${file.name}`;
-            imageUrl = await this.storageService.uploadFile(filePath, file);
+            if (file) {
+              const filePath = `fotosProfesor/${file.name}`;
+              imageUrl = await this.storageService.uploadFile(filePath, file);
             }
 
             const datosUsuario = { nombre, fechaNacimiento, edad, departamento, imageUrl, nombreParaComparar };
 
-            // Guarda los datos del usuario en Firebase Realtime Database
             this.dataService.actualizarDatos(this.data.profesor.id, datosUsuario, this.nodo).subscribe(() => {
               this.snackBar.open('Profesor actualizado con éxito!', 'Cerrar', { duration: 3000 });
               this.editarProfesorForm.reset();
@@ -105,13 +98,12 @@ export class CuadroActualizarProfesorComponent {
       const reader = new FileReader();
 
       reader.onload = (e: ProgressEvent<FileReader>) => {
-        // Asegúrate de que e.target no sea null utilizando el operador ?.
         this.srcResult = e.target?.result;
       };
 
       reader.readAsDataURL(inputNode.files[0]);
     } else {
-      this.fileSelected = false; // Asegúrate de manejar el caso donde no hay archivo
+      this.fileSelected = false;
     }
   }
 }

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Subscription, catchError, forkJoin, map, of, switchMap } from 'rxjs';
 import { DataService } from 'src/services/data.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AuthService } from 'src/services/auth.service';
@@ -19,7 +18,7 @@ import { CuadroEliminarProfesorComponent } from '../cuadro-eliminar-profesor/cua
 export class ProfesoresComponent {
   profesores: any;
 
-  constructor (public dialog: MatDialog, private dataService: DataService, private storage: AngularFireStorage, protected authService: AuthService, protected seviceStorage: FirebaseStorageService, private snackBar: MatSnackBar) {
+  constructor(public dialog: MatDialog, private dataService: DataService, private storage: AngularFireStorage, protected authService: AuthService, protected seviceStorage: FirebaseStorageService, private snackBar: MatSnackBar) {
   }
   ngAfterViewInit() {
     this.profesores = this.dataService.getProfesores();
@@ -43,19 +42,18 @@ export class ProfesoresComponent {
     const dialogRef = this.dialog.open(CuadroActualizarProfesorComponent, {
       width: '1000px',
       height: '600px',
-      data: { profesor: profesor } // Pasamos el alumno seleccionado al diálogo
+      data: { profesor: profesor }
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Aquí puedes manejar el resultado del diálogo, por ejemplo, actualizar la lista de alumnos
         this.profesores = this.dataService.getProfesores();
       }
     });
   }
 
   eliminarProfesor(profesor: any) {
-    
+
     this.seviceStorage.deleteFile(profesor.imageUrl).then(() => {
       this.dataService.eliminarRegistro(profesor.id, 'profesores').subscribe(() => {
 

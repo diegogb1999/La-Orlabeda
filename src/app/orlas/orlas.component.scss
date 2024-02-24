@@ -26,7 +26,7 @@
 .nombreOrla {
   font-size: 50px;
   font-family: 'Cascadia';
-  
+
 }
 
 .contenedor {
@@ -76,6 +76,7 @@
   padding: 0;
   overflow: hidden;
 }
+
 .viewAlumnos {
   display: flex;
   flex-direction: column;
@@ -135,19 +136,19 @@
 }
 
 .contenedorTituloBoton {
-  position: relative; /* Posición relativa para el contenedor del título y el botón */
-  width: 100%; /* Ocupa el ancho completo */
+  position: relative;
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center; /* Esto centrará el título */
+  justify-content: center;
   margin-top: 30px;
 }
 
 .contenedorBotonEliminar {
-  position: absolute; /* Posicionamiento absoluto para el botón */
-  right: 0; /* Alineado a la derecha */
-  top: 50%; /* Alineado verticalmente al centro */
-  transform: translateY(-50%); /* Ajuste fino para centrar exactamente el botón */
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
   margin-right: 30px;
 }
 

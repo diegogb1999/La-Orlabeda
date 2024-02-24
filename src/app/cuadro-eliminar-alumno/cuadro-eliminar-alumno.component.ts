@@ -1,4 +1,4 @@
-import { MatDialogRef, MAT_DIALOG_DATA } from'@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, Inject } from '@angular/core';
 
 @Component({
@@ -7,14 +7,14 @@ import { Component, Inject } from '@angular/core';
   styleUrls: ['./cuadro-eliminar-alumno.component.scss']
 })
 export class CuadroEliminarAlumnoComponent {
-nombre!: string;
+  nombre!: string;
 
   constructor(public dialogRef: MatDialogRef<CuadroEliminarAlumnoComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.nombre = data.nombre;
   }
 
   confirmarEliminacion(): void {
-    this.dialogRef.close(true); 
+    this.dialogRef.close(true);
   }
 
   cancelarEliminacion(): void {

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -21,7 +20,7 @@ export class RegistroComponent {
       password: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
-  
+
   async register() {
     if (this.registerForm.valid) {
       const { email, password } = this.registerForm.value;
@@ -32,17 +31,14 @@ export class RegistroComponent {
         });
         this.registerForm.reset();
 
-        // Redirige al usuario a otra ruta/componente
-      this.router.navigate(['/inicio']);
+        this.router.navigate(['/inicio']);
 
-      } catch (error: any) { // Asegúrate de capturar el error correctamente
-        // Verifica si el error corresponde a un email ya en uso
+      } catch (error: any) {
         if (error.code === 'auth/email-already-in-use') {
           this.snackBar.open('El correo electrónico ya está en uso.', 'Cerrar', {
             duration: 3000,
           });
         } else {
-          // Para cualquier otro error, puedes mostrar un mensaje genérico o manejar otros códigos específicos
           this.snackBar.open('Ocurrió un error al intentar registrar. Por favor intentelo nuevamente mas tarde.', 'Cerrar', {
             duration: 3000,
           });
@@ -51,5 +47,5 @@ export class RegistroComponent {
     }
   }
 
-  
+
 }

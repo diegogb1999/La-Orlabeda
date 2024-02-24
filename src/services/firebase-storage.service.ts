@@ -10,9 +10,9 @@ export class FirebaseStorageService {
 
   constructor(private storage: AngularFireStorage) { }
 
- uploadFile(filePath: string, file: File): Promise<any> {
+  uploadFile(filePath: string, file: File): Promise<any> {
     const fileRef = this.storage.ref(filePath);
-    return this.storage.upload(filePath, file).then(() => 
+    return this.storage.upload(filePath, file).then(() =>
       fileRef.getDownloadURL().toPromise());
   }
 

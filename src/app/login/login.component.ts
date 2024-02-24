@@ -19,21 +19,20 @@ export class LoginComponent {
       password: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
-  
+
   async login() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
       try {
-        await this.authService.login(email, password); // Asegúrate de esperar la promesa con await
+        await this.authService.login(email, password);
         this.snackBar.open('Inicio de sesión exitoso!', 'Cerrar', {
           duration: 3000,
         });
         this.loginForm.reset();
 
-        // Redirige al usuario a otra ruta/componente
-      this.router.navigate(['/inicio']);
+        this.router.navigate(['/inicio']);
 
-      } catch (error: any) { 
+      } catch (error: any) {
         this.snackBar.open('Error al iniciar sesión. Por favor verifica tus credenciales e intenta nuevamente.', 'Cerrar', {
           duration: 3000,
         });

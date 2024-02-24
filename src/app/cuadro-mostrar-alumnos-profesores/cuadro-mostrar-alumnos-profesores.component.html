@@ -1,6 +1,6 @@
 <div class="tablas">
     <div class="tablaProfesor">
-        <div class ="tituloProfesor"><span>Profesores</span></div>
+        <div class="tituloProfesor"><span>Profesores</span></div>
         <div class="filtro">
             <mat-form-field appearance="outline">
                 <mat-label>Filtro por nombre</mat-label>
@@ -36,14 +36,13 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumnsProfesores;"></tr>
         </table>
 
-        <mat-paginator #profesorPaginator [pageSizeOptions]="[3, 5, 10, 50, 100]"
-                 showFirstLastButtons
-                 aria-label="Select page of periodic elements">
-  </mat-paginator>
+        <mat-paginator #profesorPaginator [pageSizeOptions]="[3, 5, 10, 50, 100]" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+        </mat-paginator>
     </div>
 
     <div class="tablaAlumno">
-        <div class ="tituloAlumno"><span>Alumnos</span></div>
+        <div class="tituloAlumno"><span>Alumnos</span></div>
         <div class="filtro">
             <mat-form-field appearance="outline">
                 <mat-label>Filtro por nombre</mat-label>
@@ -80,27 +79,27 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumnsAlumnos"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumnsAlumnos;"></tr>
         </table>
-        <mat-paginator #alumnoPaginator [pageSizeOptions]="[3, 5, 10, 50, 100]"
-        showFirstLastButtons
-        aria-label="Select page of periodic elements">
-</mat-paginator>
+        <mat-paginator #alumnoPaginator [pageSizeOptions]="[3, 5, 10, 50, 100]" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+        </mat-paginator>
     </div>
 </div>
 
-<div class = "nombreOrla">
+<div class="nombreOrla">
     <form class="formularioAgregarOrla" [formGroup]="addOrlaForm" (ngSubmit)="agregarNombreOrla()">
-            <mat-form-field appearance="fill">
-                <mat-label>Nombre de la orla</mat-label>
-                <input matInput formControlName="nombre">
-                <mat-error *ngIf="addOrlaForm.get('nombre')?.errors?.['required']">El nombre de la orla es
-                    requerido</mat-error>
-            </mat-form-field>
-        </form>
+        <mat-form-field appearance="fill">
+            <mat-label>Nombre de la orla</mat-label>
+            <input matInput formControlName="nombre">
+            <mat-error *ngIf="addOrlaForm.get('nombre')?.errors?.['required']">El nombre de la orla es
+                requerido</mat-error>
+        </mat-form-field>
+    </form>
 </div>
 
 <div mat-dialog-actions class="contenedorBotonesAgregarOrla">
 
-    <button mat-button tabindex="-1" class="aceptar" [disabled]="!addOrlaForm.valid" type="submit" (click)="agregarNombreOrla()">Agregar</button>
+    <button mat-button tabindex="-1" class="aceptar" [disabled]="!addOrlaForm.valid" type="submit"
+        (click)="agregarNombreOrla()">Agregar</button>
     <button mat-button mat-dialog-close (click)="cancelarAdd()" tabindex="-1" class="denegar"
         type="button">Cancelar</button>
 </div>

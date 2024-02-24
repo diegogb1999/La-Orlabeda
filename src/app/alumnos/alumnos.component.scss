@@ -8,25 +8,25 @@
 }
 
 .botonAddAlumno {
-    background-color: white;
-    color: #00ff00;
-    height: 35px;
-    width: 35px;
-    margin-top: 30px;
-  }
+  background-color: white;
+  color: #00ff00;
+  height: 35px;
+  width: 35px;
+  margin-top: 30px;
+}
 
-  .contenedor {
-    height: 100%;
-    width: 100%;
-    margin-top: 50px;
-    display: flex;
-    gap:50px;
-    flex-direction: row;
-    flex-flow: wrap;
-    align-items: center;
-    align-content: center;
-    justify-content: space-evenly;
-    margin-bottom: 30px;
+.contenedor {
+  height: 100%;
+  width: 100%;
+  margin-top: 50px;
+  display: flex;
+  gap: 50px;
+  flex-direction: row;
+  flex-flow: wrap;
+  align-items: center;
+  align-content: center;
+  justify-content: space-evenly;
+  margin-bottom: 30px;
 
 }
 
@@ -54,6 +54,7 @@
   align-items: end;
   align-content: end;
 }
+
 .botonEliminarlumno {
   color: #ff0000;
   background-color: transparent !important;
@@ -63,6 +64,7 @@
   margin-right: 20px;
 
 }
+
 .botonActualizarAlumno {
   color: #009dff;
   background-color: transparent !important;
@@ -85,4 +87,3 @@ mat-card-title {
 mat-card-subtitle {
   margin-top: 10px;
 }
-

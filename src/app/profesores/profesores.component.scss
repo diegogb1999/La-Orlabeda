@@ -1,89 +1,89 @@
 .botones {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    gap: 30px
-  }
-  
-  .botonAddProfesor {
-      background-color: white;
-      color: #00ff00;
-      height: 35px;
-      width: 35px;
-      margin-top: 30px;
-    }
-  
-    .contenedor {
-      height: 100%;
-      width: 100%;
-      margin-top: 50px;
-      display: flex;
-      gap:50px;
-      flex-direction: row;
-      flex-flow: wrap;
-      align-items: center;
-      align-content: center;
-      justify-content: space-evenly;
-      margin-bottom: 30px;
-  
-  }
-  
-  .view {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    height: 500px;
-    width: 350px;
-    background-color: #ebe68d;
-    border-radius: 25px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-    text-align: center;
-    padding: 0;
-  }
-  
-  .contenedorBotones {
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: end;
-    align-content: end;
-  }
-  .botonEliminarProfesor {
-    color: #ff0000;
-    background-color: transparent !important;
-    box-shadow: none !important;
-    height: 35px;
-    width: 35px;
-    margin-right: 20px;
-  
-  }
-  .botonActualizarProfesor {
-    color: #009dff;
-    background-color: transparent !important;
-    box-shadow: none !important;
-    height: 35px;
-    width: 35px;
-    margin-left: 20px;
-  
-  }
-  
-  img {
-    width: 210px;
-    height: 300px;
-  }
-  
-  mat-card-title {
-    margin-top: 10px;
-  }
-  
-  mat-card-subtitle {
-    margin-top: 10px;
-  }
-  
-  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  gap: 30px
+}
+
+.botonAddProfesor {
+  background-color: white;
+  color: #00ff00;
+  height: 35px;
+  width: 35px;
+  margin-top: 30px;
+}
+
+.contenedor {
+  height: 100%;
+  width: 100%;
+  margin-top: 50px;
+  display: flex;
+  gap: 50px;
+  flex-direction: row;
+  flex-flow: wrap;
+  align-items: center;
+  align-content: center;
+  justify-content: space-evenly;
+  margin-bottom: 30px;
+
+}
+
+.view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  height: 500px;
+  width: 350px;
+  background-color: #ebe68d;
+  border-radius: 25px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  padding: 0;
+}
+
+.contenedorBotones {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+  align-content: end;
+}
+
+.botonEliminarProfesor {
+  color: #ff0000;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  height: 35px;
+  width: 35px;
+  margin-right: 20px;
+
+}
+
+.botonActualizarProfesor {
+  color: #009dff;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  height: 35px;
+  width: 35px;
+  margin-left: 20px;
+
+}
+
+img {
+  width: 210px;
+  height: 300px;
+}
+
+mat-card-title {
+  margin-top: 10px;
+}
+
+mat-card-subtitle {
+  margin-top: 10px;
+}
