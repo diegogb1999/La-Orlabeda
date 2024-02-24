@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { CookieService } from 'ngx-cookie-service';
 import 'firebase/database';
+import { FirebaseService } from './firebase.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,20 +14,21 @@ export class DataService {
 
   private firebaseUrl = 'DBURL_GOES_HERE/';
   private readonly COOKIE_KEY = 'my_auth_token';
+  forma = this.authService.getToken();
   //private apiUrl = 'https://tu-api.com/datos';
 
-  constructor(private http: HttpClient, private authService: AuthService, private db: AngularFireDatabase, private cookieService: CookieService) {
+  constructor(private http: HttpClient, private authService: AuthService, private db: AngularFireDatabase, private cookieService: CookieService, firebaseService: FirebaseService) {
 
   }
 
   agregarDatos(datos: any, nodo: string): Observable<any> {
     const token = this.cookieService.get(this.COOKIE_KEY);
-    return this.http.post(`${this.firebaseUrl}/${nodo}.json?auth=${token}`, datos);
+    return this.http.post(`${this.firebaseUrl}/${nodo}.json?auth=${this.forma}`, datos);
   }
 
   obtenerDatos(nodo: string): Observable<any> {
     const token = this.cookieService.get(this.COOKIE_KEY);
-    return this.http.get(`${this.firebaseUrl}/${nodo}.json?auth=${token}`);
+    return this.http.get(`${this.firebaseUrl}/${nodo}.json?auth=${this.forma}`);
   }
 
   /*
@@ -41,13 +43,13 @@ export class DataService {
 
   actualizarDatos(id: string, datosActualizados: any, nodo: string): Observable<any> {
     const token = this.cookieService.get(this.COOKIE_KEY);
-    const url = `${this.firebaseUrl}${nodo}/${id}.json?auth=${token}`;
+    const url = `${this.firebaseUrl}${nodo}/${id}.json?auth=${this.forma}`;
     return this.http.put<any>(url, datosActualizados);
   }
 
   eliminarRegistro(id: string, nodo: string): Observable<void> {
     const token = this.cookieService.get(this.COOKIE_KEY);
-    const url = `${this.firebaseUrl}${nodo}/${id}.json?auth=${token}`;
+    const url = `${this.firebaseUrl}${nodo}/${id}.json?auth=${this.forma}`;
     return this.http.delete<void>(url);
   }
 
@@ -138,15 +140,15 @@ export class DataService {
 
   agregarDatosOrla(datos: any, nodo: string, nombre: string): Observable<any> {
     const token = this.cookieService.get(this.COOKIE_KEY);
-    return this.http.put(`${this.firebaseUrl}/${nodo}/${nombre}.json?auth=${token}`, datos);
+    return this.http.put(`${this.firebaseUrl}/${nodo}/${nombre}.json?auth=${this.forma}`, datos);
   }
   agregarProfesoresOrla(datos: any, nodo: string, nombreOrla: string): Observable<any> {
     const token = this.cookieService.get(this.COOKIE_KEY);
-    return this.http.put(`${this.firebaseUrl}/${nodo}/${nombreOrla}/profesores.json?auth=${token}`, datos);
+    return this.http.put(`${this.firebaseUrl}/${nodo}/${nombreOrla}/profesores.json?auth=${this.forma}`, datos);
   }
   agregarAlumnosOrla(datos: any, nodo: string, nombreOrla: string): Observable<any> {
     const token = this.cookieService.get(this.COOKIE_KEY);
-    return this.http.put(`${this.firebaseUrl}/${nodo}/${nombreOrla}/alumnos.json?auth=${token}`, datos);
+    return this.http.put(`${this.firebaseUrl}/${nodo}/${nombreOrla}/alumnos.json?auth=${this.forma}`, datos);
   }
   /*obtenerProfesoresPorId(id: string): Observable<any> {
     return this.http.get(`${this.firebaseUrl}/orlas/profesores/${id}.json?auth=${this.authService.getToken}`).pipe(
@@ -160,12 +162,12 @@ export class DataService {
 // Método para obtener un profesor por ID
 obtenerProfesorPorId(id: string): Observable<any> {
   const token = this.cookieService.get(this.COOKIE_KEY);
-  return this.http.get(`${this.firebaseUrl}/profesores/${id}.json?auth=${token}`);
+  return this.http.get(`${this.firebaseUrl}/profesores/${id}.json?auth=${this.forma}`);
 }
 
 obtenerAlumnoPorId(id: string): Observable<any> {
   const token = this.cookieService.get(this.COOKIE_KEY);
-  return this.http.get(`${this.firebaseUrl}/alumnos/${id}.json?auth=${token}`);
+  return this.http.get(`${this.firebaseUrl}/alumnos/${id}.json?auth=${this.forma}`);
 }
 
 }

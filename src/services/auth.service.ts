@@ -15,52 +15,38 @@ import 'firebase/compat/auth'
 })
 export class AuthService {
 
-  private readonly COOKIE_KEY = 'my_auth_token';
+  //private readonly COOKIE_KEY = 'my_auth_token';
 
   constructor(protected cookieService: CookieService,private firebaseService: FirebaseService, private afAuth: AngularFireAuth) {}
   
-  register(email: string, password: string): Promise<string> {
-    return this.afAuth.createUserWithEmailAndPassword(email, password)
-      .then(userCredential => {
-        // Verificar si userCredential.user no es null antes de llamar a getIdToken()
-        if (userCredential.user !== null) {
-          return userCredential.user.getIdToken(); // Retornamos el token si el usuario no es null
-        } else {
-          throw new Error('No user data available after registration.'); // Lanzamos un error si user es null
-        }
-      });
-  }
+  register(email: string, password: string) {
+    return this.afAuth.createUserWithEmailAndPassword(email, password);
+    }
 
-  login(email: string, password: string): Promise<string> {
-    return this.afAuth.signInWithEmailAndPassword(email, password)
-      .then(userCredential => {
-        if (userCredential.user !== null) {
-          return userCredential.user.getIdToken(); // Procede a obtener el token si el usuario no es null
-        } else {
-          throw new Error('No user data available after login.'); // Lanza un error si user es null
-        }
-      });
+  login(email: string, password: string): Promise<UserCredential> {
+    const auth = this.firebaseService.getAuth();
+    return signInWithEmailAndPassword(auth, email, password);
   }
 
   logout(): Promise<void> {
-    return this.afAuth.signOut();
+    const auth = this.firebaseService.getAuth();
+    return signOut(auth);
   }
 
   isAuthenticated(): boolean {
-    return this.afAuth.authState !== null;
+    const auth = this.firebaseService.getAuth();
+    return auth.currentUser !== null;
   }
 
   getToken(): Promise<string | null> {
-    return this.afAuth.authState.pipe(
-        take(1),
-        map(user => user ? user.getIdToken() : null)
-      ).toPromise()
-      .then(tokenPromise => tokenPromise ? tokenPromise : null);
+    const auth = this.firebaseService.getAuth();
+    const currentUser = auth.currentUser;
+    return currentUser ? currentUser.getIdToken() : Promise.resolve(null);
   }
 
   //-----------------------------------------------------------------------
 
-  loginCookie(email: string, password: string): Promise<boolean> {
+ /* loginCookie(email: string, password: string): Promise<boolean> {
     return this.login(email, password)
       .then((token) => {
         this.cookieService.set(this.COOKIE_KEY, token);
@@ -82,6 +68,6 @@ export class AuthService {
 
   getAuthTokenCookie(): string | undefined {
     return this.cookieService.get(this.COOKIE_KEY);
-  }
+  }*/
   
 }
