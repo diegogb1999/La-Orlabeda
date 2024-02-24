@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map, take, tap } from 'rxjs';
+import { Observable, from, map, switchMap, take, tap } from 'rxjs';
 import { AuthService } from './auth.service';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { CookieService } from 'ngx-cookie-service';
@@ -22,8 +22,12 @@ export class DataService {
   }
 
   agregarDatos(datos: any, nodo: string): Observable<any> {
-    const token = this.cookieService.get(this.COOKIE_KEY);
-    return this.http.post(`${this.firebaseUrl}/${nodo}.json?auth=${this.forma}`, datos);
+    return from(this.authService.getToken()).pipe(
+      switchMap(token => {
+        const url = `${this.firebaseUrl}/${nodo}.json?auth=${token}`;
+        return this.http.post(url, datos);
+      })
+    );
   }
 
   obtenerDatos(nodo: string): Observable<any> {
