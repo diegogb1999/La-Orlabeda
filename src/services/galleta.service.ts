@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from './auth.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth'
 
 
 @Injectable({
@@ -11,7 +14,7 @@ export class GalletaService {
 
   private readonly COOKIE_KEY = 'my_auth_token';
   
-  constructor(private cookieService: CookieService, private authService: AuthService) { }
+  constructor(private afAuth: AngularFireAuth, private cookieService: CookieService, private authService: AuthService) { }
   
   login(email: string, password: string): Promise<boolean> {
     return this.authService.login(email, password)

@@ -135,7 +135,7 @@ export class CuadroMostrarAlumnosProfesoresComponent {
 
   agregarProfesorOrla(nombre: string): void {
     //this.eliminarProduccion(produccion);
-    const profesoresSeleccionados = this.seleccionProfesor.selected.map(p => p.id);
+    const profesoresSeleccionados = this.seleccionProfesor.selected.map(id => id.id);
     // Aquí, puedes llamar a tu servicio para agregar los alumnos seleccionados a la base de datos.
     // Por ejemplo:
     this.dataService.agregarProfesoresOrla(profesoresSeleccionados, this.nodo, nombre).subscribe({
@@ -165,6 +165,7 @@ export class CuadroMostrarAlumnosProfesoresComponent {
 
           this.snackBar.open('Nombre de orla añadida con éxito!', 'Cerrar', { duration: 3000 });
           this.addOrlaForm.reset();
+          this.dialogRef.close(true);
           //window.location.reload();
 
         }, error => {

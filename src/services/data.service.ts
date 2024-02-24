@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map, take } from 'rxjs';
+import { Observable, map, take, tap } from 'rxjs';
 import { AuthService } from './auth.service';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { GalletaService } from './galleta.service';
 import 'firebase/database';
 
 @Injectable({
@@ -13,7 +14,7 @@ export class DataService {
   private firebaseUrl = 'DBURL_GOES_HERE/';
   //private apiUrl = 'https://tu-api.com/datos';
 
-  constructor(private http: HttpClient, private authService: AuthService, private db: AngularFireDatabase) {
+  constructor(private http: HttpClient, private authService: AuthService, private db: AngularFireDatabase, private galletaService: GalletaService) {
 
   }
 
@@ -115,6 +116,21 @@ export class DataService {
     );
   }
 
+  getOrlas() {
+    return this.obtenerDatos('orlas').pipe(
+      tap(data => console.log('Orlas recibidas desde Firebase:', data)), // Agrega esto
+      map(response => {
+        // Comprobar si response es null o undefined
+        if (response === null || response === undefined) {
+          // Devolver un arreglo vacío si no hay datos
+          return [];
+        }
+        // Si hay datos, proceder con el mapeo
+        return Object.keys(response).map(key => ({ ...response[key], id: key }));
+      })
+    );
+  }
+
   agregarDatosOrla(datos: any, nodo: string, nombre: string): Observable<any> {
     return this.http.put(`${this.firebaseUrl}/${nodo}/${nombre}.json?auth=${this.authService.getToken}`, datos);
   }
@@ -124,4 +140,22 @@ export class DataService {
   agregarAlumnosOrla(datos: any, nodo: string, nombreOrla: string): Observable<any> {
     return this.http.put(`${this.firebaseUrl}/${nodo}/${nombreOrla}/alumnos.json?auth=${this.authService.getToken}`, datos);
   }
+  /*obtenerProfesoresPorId(id: string): Observable<any> {
+    return this.http.get(`${this.firebaseUrl}/orlas/profesores/${id}.json?auth=${this.authService.getToken}`).pipe(
+        map(response => {
+            // Aquí puedes agregar lógica adicional si es necesario, por ejemplo, manejar casos donde el alumno no existe
+            return response; // Devuelve los datos del alumno
+        })
+    );
+}*/
+
+// Método para obtener un profesor por ID
+obtenerProfesorPorId(id: string): Observable<any> {
+  return this.http.get(`${this.firebaseUrl}/profesores/${id}.json?auth=${this.authService.getToken}`);
+}
+
+obtenerAlumnoPorId(id: string): Observable<any> {
+  return this.http.get(`${this.firebaseUrl}/alumnos/${id}.json?auth=${this.authService.getToken}`);
+}
+
 }
