@@ -26,7 +26,7 @@ export class RegistroComponent {
     if (this.registerForm.valid) {
       const { email, password } = this.registerForm.value;
       try {
-        await this.authService.register(email, password); // Asegúrate de esperar la promesa con await
+        const token = await this.authService.register(email, password);
         this.snackBar.open('Registro completado con éxito!', 'Cerrar', {
           duration: 3000,
         });
